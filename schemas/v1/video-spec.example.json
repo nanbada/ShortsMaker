@@ -1,0 +1,135 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectId": "demo-001",
+  "language": "ko-KR",
+  "format": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30,
+    "durationFrames": 900
+  },
+  "brand": {
+    "fontAssetId": "font",
+    "primary": "#1F3A5F",
+    "accent": "#C7971C",
+    "background": "#FFFFFF",
+    "text": "#172033"
+  },
+  "safeArea": {
+    "top": 180,
+    "right": 180,
+    "bottom": 340,
+    "left": 80
+  },
+  "assets": [
+    {
+      "id": "font",
+      "kind": "font",
+      "path": "assets/Pretendard.woff2",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "source": "sample placeholder",
+      "rights": "owned"
+    },
+    {
+      "id": "voice",
+      "kind": "audio",
+      "path": "audio/narration.wav",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "source": "sample placeholder",
+      "rights": "owned"
+    },
+    {
+      "id": "shot",
+      "kind": "image",
+      "path": "assets/demo.png",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "source": "sample placeholder",
+      "rights": "owned"
+    }
+  ],
+  "narration": {
+    "assetId": "voice",
+    "provider": "manual",
+    "model": "recorded",
+    "voice": "sample",
+    "scriptPath": "script.md",
+    "durationMs": 30000,
+    "offsetFrame": 0
+  },
+  "captions": [
+    {
+      "text": "내용만 바꿔 반복 제작합니다.",
+      "startMs": 0,
+      "endMs": 3500,
+      "granularity": "phrase",
+      "timingSource": "manual"
+    }
+  ],
+  "scenes": [
+    {
+      "id": "s1",
+      "type": "text",
+      "startFrame": 0,
+      "durationFrames": 225,
+      "motion": "fade",
+      "transitionOut": {
+        "type": "cut",
+        "durationFrames": 0
+      },
+      "title": "반복 제작을 간단하게",
+      "body": "검증된 템플릿에 내용만 바꿉니다."
+    },
+    {
+      "id": "s2",
+      "type": "browser",
+      "startFrame": 225,
+      "durationFrames": 225,
+      "motion": "fade",
+      "transitionOut": {
+        "type": "cut",
+        "durationFrames": 0
+      },
+      "assetId": "shot",
+      "fit": "contain",
+      "highlight": {
+        "x": 100,
+        "y": 200,
+        "width": 600,
+        "height": 300
+      }
+    },
+    {
+      "id": "s3",
+      "type": "comparison",
+      "startFrame": 450,
+      "durationFrames": 225,
+      "motion": "fade",
+      "transitionOut": {
+        "type": "cut",
+        "durationFrames": 0
+      },
+      "title": "제작 방식 비교",
+      "left": {
+        "label": "매번 제작",
+        "value": "구조 변경"
+      },
+      "right": {
+        "label": "템플릿 재사용",
+        "value": "내용 변경"
+      }
+    },
+    {
+      "id": "s4",
+      "type": "cta",
+      "startFrame": 675,
+      "durationFrames": 225,
+      "motion": "fade",
+      "transitionOut": {
+        "type": "cut",
+        "durationFrames": 0
+      },
+      "title": "반복 제작을 간단하게",
+      "body": "검증된 템플릿에 내용만 바꿉니다."
+    }
+  ]
+}
