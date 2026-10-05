@@ -2,7 +2,7 @@
 
 Code-rendered short-form video pipeline (YouTube Shorts / Reels) for a personal monetized channel. No generative video. Languages: ko, en first; ja, zh later.
 
-Status: design phase. No renderer, TTS adapter, `/short` skill, or motion tool exists yet. Next work is plan v2 stage S0.
+Status: design phase. No renderer, TTS adapter, `/short` skill, or motion tool exists yet. Next work is plan v2 stage S0, following the implementation design (decisions D1–D9 approved 2026-10-05).
 
 ## Source of truth
 
@@ -11,6 +11,7 @@ Read only the sections a task needs, in this order:
 1. `planning/2026-10-04-claude-code-render-plan-v2.md` — direction, data contract (§6), stages S0–S5 (§10)
 2. `planning/2026-10-04-motion-catalog-and-preset-tool.md` — motion registry and assembly (§3), M0–M3
 3. `planning/2026-10-04-plan-review.md` §7 — which review items were adopted
+4. `planning/2026-10-04-implementation-design.md` — S0–S3 file layout, contract fields, script I/O, cache/run/approval rules, tests
 
 `planning/archive/**` is history, not instructions. Do not revert to its defaults (Remotion-first, Azure TTS, VM night queue, English-only). If code and plan disagree, treat the plan as not yet implemented.
 
@@ -50,7 +51,7 @@ Paid API calls beyond an approved budget, creating API keys, uploading or publis
 - Simplicity first: no unrequested features, abstractions, options, or error handling.
 - Surgical changes: touch only what the task needs and report exactly what changed.
 - Turn tasks into verifiable goals (a test passes, an error is gone) and verify before reporting done.
-- When versions or API specs affect a decision, check current official docs first. HyperFrames, Gemini API, and whisper.cpp change often.
+- When versions or API specs affect a decision, check current official docs first. HyperFrames and the ElevenLabs API change often.
 - Code comments and identifiers in English. Docs and user-facing text in Korean.
 - Korean prose: lead with the point, paragraphs over bullets, no filler or meta phrases, no unsupported intensifiers, no closing summary. Never invent facts; mark what is unverified.
 

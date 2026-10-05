@@ -4,6 +4,8 @@
 
 개정 r2(같은 날): [GPT 리뷰](2026-10-04-plan-review.md)의 R2~R6, 비용 단위, 범위 축소안을 반영했다. §6에 데이터 계약·음성 캐시·정렬·실패 처리·출력 규칙을 추가하고 §7 비용표와 §10 단계를 고쳤다. 항목별 채택·보류 이유는 리뷰 문서 §7에 있다.
 
+개정 r3(2026-10-05, 사용자 결정): TTS를 Gemini 3.8 Flash TTS에서 ElevenLabs Eleven v4로 바꿨다. 자막 정렬도 whisper.cpp 대신 ElevenLabs Forced Alignment를 쓴다. 이 문서의 Gemini·whisper.cpp 관련 내용(§1 음성·자막 정렬 행, §2 무료 TTS 우선 기법, §5 TTS·전사 행, §6 TTS 실패 처리·자막 정렬, §7 비용표)은 [구현 설계](2026-10-04-implementation-design.md) r3 §6·§7과 D6·D8로 대체되며 본문은 고치지 않았다.
+
 전제(사용자 확인): 학원과 무관한 개인 수익화 채널. 정보 전달·설명·광고·홍보·가상 AI 캐릭터 등 포맷은 다양하되 전부 지원할 필요는 없다. 한국어·영어·일본어·중국어 지원. 운영비 최소화. 개발 단계에는 Claude Pro, GPT Plus, Gemini Pro CLI를 함께 쓰고 운영은 Claude 중심. Muse AI VM은 선택 사항.
 
 ## 1. 권고안

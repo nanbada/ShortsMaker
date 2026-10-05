@@ -85,3 +85,59 @@
 이동: 루트 01·02·03·06·sources.md와 과거 인계 원문 → `planning/archive/v1/`, v2 이전 문서 4개 → `planning/archive/pre-v2/`, v1 스키마·검사 코드 → `schemas/v1/`(05 문서는 `schemas/v1/README.md`), `aidd_docs/worklog.md` → `planning/worklog.md`, 04 인계 현행 부분 → `planning/handoff.md`. 현재 기준 문서 3개는 claude.ai 프로젝트 경로 유지를 위해 파일명을 바꾸지 않았다. v2 §6과 모션 문서의 새 스키마 경로를 `schemas/v2/scenes.schema.json`으로 명시했다.
 
 검증: 내부 Markdown 링크 50개 깨짐 0, v1 예시 검사와 단위 테스트 3개 통과. 이 기록의 이전 항목에 남은 옛 경로는 당시 기록이라 고치지 않았다.
+
+## 2026-10-04 S0~S3 구현 설계 (Claude) · GPT 리뷰
+
+요청: 프로젝트 설계 진행, 필요하면 Sonnet에 위임, 설계 후 GPT 리뷰. 범위는 사용자 선택으로 S0~S3 구현 설계 문서(코드·스키마 파일 제외), 리뷰는 Codex CLI 읽기 전용.
+
+조사: HyperFrames CLI·composition·변수·오디오·카탈로그 manifest, Gemini TTS·whisper.cpp·BudouX 최신 공식 문서를 Sonnet 서브에이전트 2개로 병렬 조사하고, Gemini 가격과 음성 생성 예시는 직접 다시 열어 확인했다. 확인한 것: HyperFrames 0.8.123(2026-10-04), 시간 속성은 초 단위, 변수는 스칼라만, Gemini 3.8 Flash TTS는 Interactions API 예시만 있고 24kHz WAV·seed 없음·타임스탬프 없음, 가격은 v2 §7과 같음, whisper.cpp Homebrew 1.8.6/upstream 1.9.4.
+
+산출물: `planning/2026-10-04-implementation-design.md`(r2), `planning/2026-10-04-implementation-design-review.md`(Codex 리뷰 원문). README 문서 표와 AGENTS.md source-of-truth 목록에 설계 문서를 추가했다.
+
+주요 결정(승인 대기 D1~D9): Node 단일 런타임과 의존성 최소화, scenes.json은 구절 ID(문구 해시 포함)로 시각 지정하고 프레임은 파생 timeline.json, 장면 데이터는 템플릿 내 JSON 블록, 자막은 별도 composition, pronounce.json, whisper.cpp Homebrew, F0 검사 보류, S2는 무료 티어만, run 불변.
+
+리뷰: Codex가 G1~G10(P1 5, P2 5)과 축소안 4개를 냈고 모두 채택했다. G1은 구절 ID에 문구 해시를 넣는 방식으로, G2는 내부 누락·삽입·반복 위험 검출 규칙으로 리뷰 수정안과 다르게 고쳤다. Mac에 설치된 Codex CLI 0.144.5는 설정 모델(gpt-6-astra)을 지원하지 않아 실패했고 ChatGPT 앱 번들 0.160.0으로 실행했다.
+
+관측: Mac은 FFmpeg 8.0.1, Node 23.9.0이라 HyperFrames 요구(FFmpeg 7.x, Node 22.x 권장)와 다르다. S0 첫 작업에서 doctor로 확인한다.
+
+검증: 변경 문서 포함 9개 Markdown의 로컬 링크 34개 깨짐 0, v1 예시 검사와 단위 테스트 3개 통과, 설계 예시의 코드 포인트 범위 재계산, git diff로 변경 범위(AGENTS·README·handoff·worklog 수정, 설계·리뷰 2개 추가) 확인. 검증 중 Cowork VM에서 실행한 git status가 `.git/index.lock`을 남겨 사용자 승인 후 삭제했다. 설치·렌더·TTS 호출·커밋은 하지 않았다.
+
+다음 단계: 사용자가 D1~D9를 승인하면 S0 시작(의존성 설치, whisper.cpp, Gemini 키는 사용자 발급).
+
+## 2026-10-05 구현 설계 r3: TTS를 ElevenLabs v4로 교체 (Claude)
+
+요청: TTS를 ElevenLabs v4로 적용, 업데이트한 Codex CLI(gpt-6-astra)로 구현 설계 리뷰.
+
+조사: ElevenLabs 공식 문서를 Sonnet 서브에이전트로 확인했다. `eleven_v4`는 요청당 10,000자, ko·en·ja·zh 지원, SSML·style 없이 audio tag 사용, seed는 결정론 보장 없음. 일반 TTS 엔드포인트 지원 여부는 문서끼리 엇갈려 미확인. 무료 플랜 음성은 업그레이드 후에도 상업 이용 불가. 크레딧 소진 시 자동 초과 과금 없음(PAYG 잔액이 있으면 차감). v4 글자당 크레딧 비율은 문서에 없음. Forced Alignment API는 텍스트와 음성으로 글자·단어 시각과 단어별 loss를 주며 시간당 $0.22.
+
+결정(승인 대기): D6을 whisper.cpp+LCS에서 ElevenLabs Forced Alignment 단일 경로로, D8을 무료 티어 전제에서 유료 플랜 크레딧 한도·원장 글자 상한으로 바꿨다. 문장별 연기 지시는 `script.json`의 `tag` 필드로만 받아 화면 문구·정렬 텍스트와 분리했다. 비용 추정은 ko 하루 1편 Starter, ko·en 하루 1편씩 Creator(1자 1크레딧 가정).
+
+변경: 설계 문서 r3(§1·§2·§3·§4.1·§4.2·§4.4·§4.7·§6·§7.2~7.4·§11·§12·§13·출처), r2 본문을 `planning/archive/implementation-design-r2.md`로 보존(whisper 경로로 되돌아갈 때의 근거), 기획 v2 상단에 r3 개정 표시, README 방향 문장과 AGENTS.md의 자주 바뀌는 API 목록 수정.
+
+발견: 어제 설계 문서를 Mac에 쓰는 과정에서 마지막 편집(§11 시험 표, §13)이 빠진 사본이 Mac과 claude.ai 프로젝트에 올라가 있었다. 같은 경로로 다시 쓸 때 이전 업로드가 재사용된 것으로 보이며, r3는 새 파일명으로 올리고 SHA-256으로 일치를 확인했다. 1차 리뷰(앱 번들 CLI 0.160.0)도 모델은 이미 gpt-6-astra(추론 medium)였다.
+
+리뷰: Codex CLI 0.160.0, gpt-6-astra, 추론 high로 실행했으나 ChatGPT 사용 한도 초과로 실패했다(03:31 이후 재시도 가능 안내).
+
+## 2026-10-05 2차 GPT 리뷰와 설계 r4 (Claude)
+
+예약 작업으로 03:36에 Codex 리뷰를 다시 실행해 성공했다(gpt-6-astra, 추론 high, 약 3분). 결과는 리뷰 문서의 '2차 리뷰 (r3)' 절에 원문 그대로 붙였다. H1~H7(P1 3, P2 3, P3 1)과 축소안 3개를 모두 채택해 설계를 r4로 고쳤다. 1차 G1~G10 중 G4~G8·G10은 해결, G1·G2·G3·G9는 부분으로 판정됐고 각각 H3·H2·H1·H5~H6으로 마무리했다.
+
+주요 변경: 수동 음성·수동 timings 경로를 정의하고 S1을 API 키 없이 진행(H1), 정렬 검출력을 다섯 경우 실제 시험과 청취 확인 목록으로 검증(H2), 구절 ID 해시를 4자에서 8자로 늘리고 충돌은 오류(H3, `항목 15입니다.`/`항목 167입니다.` 4자 충돌을 직접 계산으로 재현), 두 엔드포인트의 완전한 요청 본문과 운영 중 자동 전환 삭제(H4), 상한을 크레딧 단위로 통일하고 정렬 비율 분리(H5), 전송 전 원장 기록으로 처리 불명 시도 차단을 TTS·정렬 공통으로(H6), 소수 직렬화 규칙과 kind별 원장 시험(H7).
+
+검증: 설계 문서는 새 파일명으로 커밋한 뒤 Mac 사본 SHA-256을 대조했다. Mac 사본 해시 c27557d3…가 작성본과 일치. 로컬 링크 48개 깨짐 0, v1 예시 단위 테스트 통과. 남은 Gemini·whisper 언급은 개정 이력·대안·출처 안내뿐이다. 설치·API 호출·커밋은 하지 않았다.
+
+## 2026-10-05 D1~D9 승인
+
+사용자가 구현 설계 r4의 D1~D9를 모두 승인했다. 설계 문서 상태 줄과 §2 제목, AGENTS.md의 다음 작업 문장을 고쳤다. 같은 날 사용자가 낸 중간 결과물 후보 관리·예약 확장 의견은 사용자 요청으로 설계에 반영하지 않았다.
+
+## 2026-10-05 설계 r5: ElevenLabs Free 플랜 시험
+
+사용자 지시로 ElevenLabs를 Free 플랜으로 시험 수준에서 진행하도록 설계를 고쳤다. D8을 개발·시험은 Free(월 1만 크레딧), 게시용 음성은 유료 전환 후 새로 합성으로 바꿨다. Free 음성은 업그레이드 후에도 상업 이용이 안 되므로 `voice.json`과 TTS 캐시 키에 `planTier`를 넣어 유료 전환 뒤 재사용을 막고, Free 음성 run은 manifest `publishable: false`와 `final.NOT-FOR-PUBLISH.mp4`로 남긴다. Free 1만 크레딧 안의 시험량(S0 약 2,500, S2 약 6,000, 1자 1크레딧 가정)을 적었다. Free 플랜 API에서 v4·Forced Alignment를 쓸 수 있는지는 미확인으로 S0 첫 호출에서 확인한다. 같은 날 검토한 GPT 조사(Qwen3-TTS 등)는 대화 의견으로만 다뤘고 설계에 넣지 않았다.
+
+## 2026-10-05 S0 준비 확인
+
+`.env`에 `ELEVENLABS_API_KEY`·`GEMINI_API_KEY` 변수가 있음을 값 없이 이름만 확인했다(`.gitignore` 적용). 크레딧을 쓰지 않는 조회(`/v1/user/subscription`, `/v2/voices`)를 시험했으나 두 요청 모두 400 `api_key_id_used_as_api_key`였다. 저장된 값이 `sk_`로 시작하는 실제 키가 아니라 키 ID다. 사용자가 키를 다시 넣어야 한다.
+
+조사: ElevenLabs Default voices는 2026년 3월 이전에 만든 계정에서만 쓸 수 있고 2026-12-31에 만료된다(공식 도움말). Free 플랜 API에서 Voice Library 음성은 402 "Free users cannot use library voices via the API"로 거부된다는 사용자 보고가 있다(공식 문서로는 미확인). 계정 생성 시점에 따라 Free 플랜 API로 쓸 수 있는 음성이 없을 수 있어, 키를 고친 뒤 음성 목록 조회로 확인한다.
+
+결정: HyperFrames 스킬은 전역 플러그인으로 설치하고 `config/tools.lock.json`으로 버전을 관리한다(설계 §11 S0). 커밋은 main에 직접 하고 push한다(저장소 공개).

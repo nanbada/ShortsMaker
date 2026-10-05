@@ -2,7 +2,7 @@
 
 개인 수익화 채널용 숏폼을 코드로 렌더하는 프로젝트다. 지금은 설계 단계라 렌더러·TTS 연결·`/short` 스킬·모션 도구가 아직 없다.
 
-방향은 HyperFrames 우선(Remotion 대안), Gemini TTS, Mac 로컬, Claude 대화형 운영이다. 한국어·영어로 시작해 일본어·중국어를 더한다. Muse VM·야간 무인 실행·자동 게시는 필요할 때 검토한다.
+방향은 HyperFrames 우선(Remotion 대안), ElevenLabs v4 TTS, Mac 로컬, Claude 대화형 운영이다. 한국어·영어로 시작해 일본어·중국어를 더한다. Muse VM·야간 무인 실행·자동 게시는 필요할 때 검토한다.
 
 ## 현재 문서
 
@@ -11,6 +11,7 @@
 | [기획 v2](planning/2026-10-04-claude-code-render-plan-v2.md) | 제품 방향, 데이터 계약(§6), 단계 S0~S5(§10) |
 | [모션 카탈로그·프리셋](planning/2026-10-04-motion-catalog-and-preset-tool.md) | 모션 레지스트리·조립 설계, M0~M3 |
 | [리뷰](planning/2026-10-04-plan-review.md) | GPT 리뷰. 반영 결과는 §7 |
+| [구현 설계](planning/2026-10-04-implementation-design.md) | S0~S3 파일 구조, 데이터 계약 필드, 캐시·재개·승인, 검사·완료 기준 |
 | [인계](planning/handoff.md) | 에이전트 간 인계 양식 |
 | [작업 기록](planning/worklog.md) | 시점별 결정·변경·검증 |
 
