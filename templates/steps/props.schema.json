@@ -1,0 +1,22 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["items"],
+  "properties": {
+    "title": { "type": "string", "minLength": 1, "maxGraphemes": 20 },
+    "items": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 4,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["text", "atPhrase"],
+        "properties": {
+          "text": { "type": "string", "minLength": 1, "maxGraphemes": 22 },
+          "atPhrase": { "$ref": "https://shortsmaker.local/schemas/v2/scenes.schema.json#/$defs/phraseId" }
+        }
+      }
+    }
+  }
+}

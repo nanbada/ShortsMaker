@@ -1,0 +1,103 @@
+{
+  "schemaVersion": "2.0.0",
+  "jobId": "mm-calc",
+  "lang": "en-US",
+  "theme": {
+    "id": "base",
+    "accent": "green"
+  },
+  "captions": {
+    "enabled": true,
+    "style": "phrase-bottom"
+  },
+  "tailFrames": 15,
+  "scenes": [
+    {
+      "id": "hook",
+      "type": "hook",
+      "startPhrase": "s01-dc8fe754",
+      "props": {
+        "headline": "Man-month math",
+        "sub": "Still confusing?"
+      },
+      "transition": {
+        "id": "crossfade",
+        "durationFrames": 12
+      }
+    },
+    {
+      "id": "price",
+      "type": "keyword",
+      "startPhrase": "s03-1c8ca61c",
+      "props": {
+        "text": "$1,200",
+        "note": "per person per month",
+        "emphasis": "accent"
+      },
+      "transition": {
+        "id": "cut"
+      }
+    },
+    {
+      "id": "easy",
+      "type": "keyword",
+      "startPhrase": "s05-6ebb9010",
+      "props": {
+        "text": "Simple!",
+        "emphasis": "plain"
+      },
+      "transition": {
+        "id": "cut"
+      }
+    },
+    {
+      "id": "how",
+      "type": "steps",
+      "startPhrase": "s06-d501203f",
+      "props": {
+        "title": "The order",
+        "items": [
+          {
+            "text": "Confirm headcount",
+            "atPhrase": "s07-834a7ece"
+          },
+          {
+            "text": "Convert to months",
+            "atPhrase": "s08-34e0a455"
+          },
+          {
+            "text": "Multiply by price",
+            "atPhrase": "s09-957107d4"
+          }
+        ]
+      },
+      "transition": {
+        "id": "crossfade",
+        "durationFrames": 15
+      }
+    },
+    {
+      "id": "example",
+      "type": "keyword",
+      "startPhrase": "s10-9973e461",
+      "props": {
+        "text": "$7,200",
+        "note": "3 people x 2 months",
+        "emphasis": "accent"
+      },
+      "transition": {
+        "id": "crossfade",
+        "durationFrames": 10
+      }
+    },
+    {
+      "id": "outro",
+      "type": "hook",
+      "startPhrase": "s12-b897af27",
+      "props": {
+        "headline": "Try it yourself",
+        "sub": "See you next video"
+      }
+    }
+  ]
+}

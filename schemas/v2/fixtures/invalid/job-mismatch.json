@@ -1,0 +1,19 @@
+{
+  "base": "ko",
+  "description": "scenes jobId differs from script jobId",
+  "patch": [
+    {
+      "file": "scenes",
+      "op": "replace",
+      "path": "/jobId",
+      "value": "mm-calc-2"
+    }
+  ],
+  "expect": [
+    {
+      "file": "scenes",
+      "code": "job-mismatch",
+      "path": "/jobId"
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "base": "ko",
+  "description": "square brackets in sentence display are reserved for audio tags",
+  "patch": [
+    {
+      "file": "script",
+      "op": "replace",
+      "path": "/sentences/1/display",
+      "value": "오늘은 [딱] 세 가지만 기억하세요."
+    }
+  ],
+  "expect": [
+    {
+      "file": "script",
+      "code": "schema.pattern",
+      "path": "/sentences/1/display"
+    }
+  ]
+}

@@ -1,0 +1,82 @@
+{
+  "schemaVersion": "2.0.0",
+  "jobId": "mm-calc",
+  "lang": "en-US",
+  "title": "Man-month math",
+  "voice": {
+    "provider": "elevenlabs",
+    "model": "eleven_v4",
+    "voiceId": "TESTVOICE01",
+    "settings": {
+      "stability": 0.5,
+      "similarity": 0.75
+    },
+    "seed": 11
+  },
+  "sentences": [
+    {
+      "id": "s01",
+      "display": "Man-month math, still confusing?",
+      "tag": "curious, friendly"
+    },
+    {
+      "id": "s02",
+      "display": "Remember just three things today."
+    },
+    {
+      "id": "s03",
+      "display": "The unit price is $1,200.",
+      "spoken": "The unit price is twelve hundred dollars."
+    },
+    {
+      "id": "s04",
+      "display": "That's per person, per month."
+    },
+    {
+      "id": "s05",
+      "display": "It's really simple."
+    },
+    {
+      "id": "s06",
+      "display": "Here is the order."
+    },
+    {
+      "id": "s07",
+      "display": "First, confirm the headcount,"
+    },
+    {
+      "id": "s08",
+      "display": "then convert the period to months,"
+    },
+    {
+      "id": "s09",
+      "display": "and finally multiply by the price."
+    },
+    {
+      "id": "s10",
+      "display": "Say three people for two months,"
+    },
+    {
+      "id": "s11",
+      "display": "so the total is $7,200."
+    },
+    {
+      "id": "s12",
+      "display": "Now try it yourself."
+    },
+    {
+      "id": "s13",
+      "display": "Leave your questions in the comments."
+    },
+    {
+      "id": "s14",
+      "display": "See you in the next video!"
+    }
+  ],
+  "sources": [
+    {
+      "title": "Fixture reference",
+      "url": "https://example.com/mm-calc"
+    }
+  ]
+}

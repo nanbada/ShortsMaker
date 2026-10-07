@@ -1,0 +1,13 @@
+{
+  "tts": {
+    "provider": "elevenlabs",
+    "endpoint": "tts",
+    "planTier": "free"
+  },
+  "budget": {
+    "monthlyCredits": 10000,
+    "billingCycleStartDay": 4,
+    "ttsCreditsPerChar": 1,
+    "alignCreditsPerSecond": 1.2
+  }
+}

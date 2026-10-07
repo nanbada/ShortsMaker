@@ -1,0 +1,27 @@
+{
+  "base": "en",
+  "description": "fx-rise has no en verification entry",
+  "patch": [
+    {
+      "file": "scenes",
+      "op": "add",
+      "path": "/scenes/1/motion",
+      "value": {
+        "in": {
+          "id": "fx-rise",
+          "params": {
+            "accent": "blue"
+          },
+          "durationFrames": 12
+        }
+      }
+    }
+  ],
+  "expect": [
+    {
+      "file": "scenes",
+      "code": "motion-unverified",
+      "path": "/scenes/1/motion/in/id"
+    }
+  ]
+}

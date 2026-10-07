@@ -1,0 +1,19 @@
+{
+  "base": "ko",
+  "description": "fx-rise durationFrames 31 exceeds max 30",
+  "patch": [
+    {
+      "file": "scenes",
+      "op": "replace",
+      "path": "/scenes/1/motion/in/durationFrames",
+      "value": 31
+    }
+  ],
+  "expect": [
+    {
+      "file": "scenes",
+      "code": "motion-duration-range",
+      "path": "/scenes/1/motion/in/durationFrames"
+    }
+  ]
+}

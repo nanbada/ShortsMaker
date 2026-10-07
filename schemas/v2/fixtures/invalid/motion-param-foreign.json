@@ -1,0 +1,21 @@
+{
+  "base": "ko",
+  "description": "param that does not belong to fx-rise",
+  "patch": [
+    {
+      "file": "scenes",
+      "op": "replace",
+      "path": "/scenes/1/motion/in/params",
+      "value": {
+        "speed": "x"
+      }
+    }
+  ],
+  "expect": [
+    {
+      "file": "scenes",
+      "code": "motion-param",
+      "path": "/scenes/1/motion/in/params/speed"
+    }
+  ]
+}

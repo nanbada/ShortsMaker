@@ -1,0 +1,538 @@
+{
+  "schemaVersion": "2.0.0",
+  "lang": "en-US",
+  "audio": {
+    "sha256": "06eea7092edf9564bed088d06c2fce51caf79bd61f7ec33a581f7bf208053004",
+    "durationMs": 44600,
+    "sampleRate": 24000,
+    "channels": 1
+  },
+  "source": {
+    "spokenSha256": "7e841940103392bfbeacc11d55937333b6eeb93851749b8c2c571b6a787474b5",
+    "phrasingSha256": "441f0328a21d467d48fe0007950bce945cbe87a7f36747d17970b0efe86405e7",
+    "aligner": null
+  },
+  "status": "ok",
+  "phrases": [
+    {
+      "id": "s01-dc8fe754",
+      "sentenceId": "s01",
+      "display": "Man-month math,",
+      "spoken": "Man-month math,",
+      "displayRange": [
+        0,
+        15
+      ],
+      "spokenRange": [
+        0,
+        15
+      ],
+      "startMs": 100,
+      "endMs": 1629,
+      "maxWordLoss": null,
+      "timingSource": "manual",
+      "review": "reviewed",
+      "issues": []
+    },
+    {
+      "id": "s01-86f87d73",
+      "sentenceId": "s01",
+      "display": "still confusing?",
+      "spoken": "still confusing?",
+      "displayRange": [
+        16,
+        32
+      ],
+      "spokenRange": [
+        16,
+        32
+      ],
+      "startMs": 1669,
+      "endMs": 3300,
+      "maxWordLoss": null,
+      "timingSource": "manual",
+      "review": "reviewed",
+      "issues": []
+    },
+    {
+      "id": "s02-8332cee0",
+      "sentenceId": "s02",
+      "display": "Remember just",
+      "spoken": "Remember just",
+      "displayRange": [
+        0,
+        13
+      ],
+      "spokenRange": [
+        0,
+        13
+      ],
+      "startMs": 3600,
+      "endMs": 4843,
+      "maxWordLoss": null,
+      "timingSource": "manual",
+      "review": "reviewed",
+      "issues": []
+    },
+    {
+      "id": "s02-b48026d4",
+      "sentenceId": "s02",
+      "display": "three things today.",
+      "spoken": "three things today.",
+      "displayRange": [
+        14,
+        33
+      ],
+      "spokenRange": [
+        14,
+        33
+      ],
+      "startMs": 4883,
+      "endMs": 6700,
+      "maxWordLoss": null,
+      "timingSource": "manual",
+      "review": "reviewed",
+      "issues": []
+    },
+    {
+      "id": "s03-1c8ca61c",
+      "sentenceId": "s03",
+      "display": "The unit price is $1,200.",
+      "spoken": "The unit price is twelve hundred dollars.",
+      "displayRange": [
+        0,
+        25
+      ],
+      "spokenRange": [
+        0,
+        41
+      ],
+      "startMs": 7100,
+      "endMs": 9800,
+      "maxWordLoss": null,
+      "timingSource": "manual",
+      "review": "reviewed",
+      "issues": []
+    },
+    {
+      "id": "s04-18f2778c",
+      "sentenceId": "s04",
+      "display": "That's per person,",
+      "spoken": "That's per person,",
+      "displayRange": [
+        0,
+        18
+      ],
+      "spokenRange": [
+        0,
+        18
+      ],
+      "startMs": 10100,
+      "endMs": 11553,
+      "maxWordLoss": null,
+      "timingSource": "manual",
+      "review": "reviewed",
+      "issues": []
+    },
+    {
+      "id": "s04-f6906646",
+      "sentenceId": "s04",
+      "display": "per month.",
+      "spoken": "per month.",
+      "displayRange": [
+        19,
+        29
+      ],
+      "spokenRange": [
+        19,
+        29
+      ],
+      "startMs": 11593,
+      "endMs": 12400,
+      "maxWordLoss": null,
+      "timingSource": "manual",
+      "review": "reviewed",
+      "issues": []
+    },
+    {
+      "id": "s05-6ebb9010",
+      "sentenceId": "s05",
+      "display": "It's really simple.",
+      "spoken": "It's really simple.",
+      "displayRange": [
+        0,
+        19
+      ],
+      "spokenRange": [
+        0,
+        19
+      ],
+      "startMs": 12800,
+      "endMs": 14000,
+      "maxWordLoss": null,
+      "timingSource": "manual",
+      "review": "reviewed",
+      "issues": []
+    },
+    {
+      "id": "s06-d501203f",
+      "sentenceId": "s06",
+      "display": "Here is",
+      "spoken": "Here is",
+      "displayRange": [
+        0,
+        7
+      ],
+      "spokenRange": [
+        0,
+        7
+      ],
+      "startMs": 14050,
+      "endMs": 14960,
+      "maxWordLoss": null,
+      "timingSource": "manual",
+      "review": "reviewed",
+      "issues": []
+    },
+    {
+      "id": "s06-8aba8def",
+      "sentenceId": "s06",
+      "display": "the order.",
+      "spoken": "the order.",
+      "displayRange": [
+        8,
+        18
+      ],
+      "spokenRange": [
+        8,
+        18
+      ],
+      "startMs": 15000,
+      "endMs": 16300,
+      "maxWordLoss": null,
+      "timingSource": "manual",
+      "review": "reviewed",
+      "issues": []
+    },
+    {
+      "id": "s07-834a7ece",
+      "sentenceId": "s07",
+      "display": "First, confirm",
+      "spoken": "First, confirm",
+      "displayRange": [
+        0,
+        14
+      ],
+      "spokenRange": [
+        0,
+        14
+      ],
+      "startMs": 16700,
+      "endMs": 18130,
+      "maxWordLoss": null,
+      "timingSource": "manual",
+      "review": "reviewed",
+      "issues": []
+    },
+    {
+      "id": "s07-a2191265",
+      "sentenceId": "s07",
+      "display": "the headcount,",
+      "spoken": "the headcount,",
+      "displayRange": [
+        15,
+        29
+      ],
+      "spokenRange": [
+        15,
+        29
+      ],
+      "startMs": 18170,
+      "endMs": 19600,
+      "maxWordLoss": null,
+      "timingSource": "manual",
+      "review": "reviewed",
+      "issues": []
+    },
+    {
+      "id": "s08-34e0a455",
+      "sentenceId": "s08",
+      "display": "then convert the",
+      "spoken": "then convert the",
+      "displayRange": [
+        0,
+        16
+      ],
+      "spokenRange": [
+        0,
+        16
+      ],
+      "startMs": 19900,
+      "endMs": 21529,
+      "maxWordLoss": null,
+      "timingSource": "manual",
+      "review": "reviewed",
+      "issues": []
+    },
+    {
+      "id": "s08-d60035b4",
+      "sentenceId": "s08",
+      "display": "period to months,",
+      "spoken": "period to months,",
+      "displayRange": [
+        17,
+        34
+      ],
+      "spokenRange": [
+        17,
+        34
+      ],
+      "startMs": 21569,
+      "endMs": 23300,
+      "maxWordLoss": null,
+      "timingSource": "manual",
+      "review": "reviewed",
+      "issues": []
+    },
+    {
+      "id": "s09-957107d4",
+      "sentenceId": "s09",
+      "display": "and finally",
+      "spoken": "and finally",
+      "displayRange": [
+        0,
+        11
+      ],
+      "spokenRange": [
+        0,
+        11
+      ],
+      "startMs": 23600,
+      "endMs": 24720,
+      "maxWordLoss": null,
+      "timingSource": "manual",
+      "review": "reviewed",
+      "issues": []
+    },
+    {
+      "id": "s09-cd7599cf",
+      "sentenceId": "s09",
+      "display": "multiply by the price.",
+      "spoken": "multiply by the price.",
+      "displayRange": [
+        12,
+        34
+      ],
+      "spokenRange": [
+        12,
+        34
+      ],
+      "startMs": 24760,
+      "endMs": 27000,
+      "maxWordLoss": null,
+      "timingSource": "manual",
+      "review": "reviewed",
+      "issues": []
+    },
+    {
+      "id": "s10-9973e461",
+      "sentenceId": "s10",
+      "display": "Say three people",
+      "spoken": "Say three people",
+      "displayRange": [
+        0,
+        16
+      ],
+      "spokenRange": [
+        0,
+        16
+      ],
+      "startMs": 27500,
+      "endMs": 29131,
+      "maxWordLoss": null,
+      "timingSource": "manual",
+      "review": "reviewed",
+      "issues": []
+    },
+    {
+      "id": "s10-54301f73",
+      "sentenceId": "s10",
+      "display": "for two months,",
+      "spoken": "for two months,",
+      "displayRange": [
+        17,
+        32
+      ],
+      "spokenRange": [
+        17,
+        32
+      ],
+      "startMs": 29171,
+      "endMs": 30700,
+      "maxWordLoss": null,
+      "timingSource": "manual",
+      "review": "reviewed",
+      "issues": []
+    },
+    {
+      "id": "s11-3c97666c",
+      "sentenceId": "s11",
+      "display": "so the total",
+      "spoken": "so the total",
+      "displayRange": [
+        0,
+        12
+      ],
+      "spokenRange": [
+        0,
+        12
+      ],
+      "startMs": 31000,
+      "endMs": 32724,
+      "maxWordLoss": null,
+      "timingSource": "manual",
+      "review": "reviewed",
+      "issues": []
+    },
+    {
+      "id": "s11-a5db76fb",
+      "sentenceId": "s11",
+      "display": "is $7,200.",
+      "spoken": "is $7,200.",
+      "displayRange": [
+        13,
+        23
+      ],
+      "spokenRange": [
+        13,
+        23
+      ],
+      "startMs": 32764,
+      "endMs": 34200,
+      "maxWordLoss": null,
+      "timingSource": "manual",
+      "review": "reviewed",
+      "issues": []
+    },
+    {
+      "id": "s12-b897af27",
+      "sentenceId": "s12",
+      "display": "Now try",
+      "spoken": "Now try",
+      "displayRange": [
+        0,
+        7
+      ],
+      "spokenRange": [
+        0,
+        7
+      ],
+      "startMs": 35100,
+      "endMs": 36301,
+      "maxWordLoss": null,
+      "timingSource": "manual",
+      "review": "reviewed",
+      "issues": []
+    },
+    {
+      "id": "s12-102bef41",
+      "sentenceId": "s12",
+      "display": "it yourself.",
+      "spoken": "it yourself.",
+      "displayRange": [
+        8,
+        20
+      ],
+      "spokenRange": [
+        8,
+        20
+      ],
+      "startMs": 36341,
+      "endMs": 38400,
+      "maxWordLoss": null,
+      "timingSource": "manual",
+      "review": "reviewed",
+      "issues": []
+    },
+    {
+      "id": "s13-aed3a0bf",
+      "sentenceId": "s13",
+      "display": "Leave your questions",
+      "spoken": "Leave your questions",
+      "displayRange": [
+        0,
+        20
+      ],
+      "spokenRange": [
+        0,
+        20
+      ],
+      "startMs": 38800,
+      "endMs": 40500,
+      "maxWordLoss": null,
+      "timingSource": "manual",
+      "review": "reviewed",
+      "issues": []
+    },
+    {
+      "id": "s13-a934eb79",
+      "sentenceId": "s13",
+      "display": "in the comments.",
+      "spoken": "in the comments.",
+      "displayRange": [
+        21,
+        37
+      ],
+      "spokenRange": [
+        21,
+        37
+      ],
+      "startMs": 40540,
+      "endMs": 41900,
+      "maxWordLoss": null,
+      "timingSource": "manual",
+      "review": "reviewed",
+      "issues": []
+    },
+    {
+      "id": "s14-10dee9bc",
+      "sentenceId": "s14",
+      "display": "See you in",
+      "spoken": "See you in",
+      "displayRange": [
+        0,
+        10
+      ],
+      "spokenRange": [
+        0,
+        10
+      ],
+      "startMs": 42300,
+      "endMs": 43084,
+      "maxWordLoss": null,
+      "timingSource": "manual",
+      "review": "reviewed",
+      "issues": []
+    },
+    {
+      "id": "s14-b54c3f20",
+      "sentenceId": "s14",
+      "display": "the next video!",
+      "spoken": "the next video!",
+      "displayRange": [
+        11,
+        26
+      ],
+      "spokenRange": [
+        11,
+        26
+      ],
+      "startMs": 43124,
+      "endMs": 44300,
+      "maxWordLoss": null,
+      "timingSource": "manual",
+      "review": "reviewed",
+      "issues": []
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "base": "ko",
+  "description": "atPhrase matches the id pattern but is not in timings",
+  "patch": [
+    {
+      "file": "scenes",
+      "op": "replace",
+      "path": "/scenes/3/props/items/0/atPhrase",
+      "value": "s99-deadbeef"
+    }
+  ],
+  "expect": [
+    {
+      "file": "scenes",
+      "code": "phrase-unknown",
+      "path": "/scenes/3/props/items/0/atPhrase"
+    }
+  ]
+}

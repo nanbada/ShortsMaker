@@ -141,3 +141,23 @@
 조사: ElevenLabs Default voices는 2026년 3월 이전에 만든 계정에서만 쓸 수 있고 2026-12-31에 만료된다(공식 도움말). Free 플랜 API에서 Voice Library 음성은 402 "Free users cannot use library voices via the API"로 거부된다는 사용자 보고가 있다(공식 문서로는 미확인). 계정 생성 시점에 따라 Free 플랜 API로 쓸 수 있는 음성이 없을 수 있어, 키를 고친 뒤 음성 목록 조회로 확인한다.
 
 결정: HyperFrames 스킬은 전역 플러그인으로 설치하고 `config/tools.lock.json`으로 버전을 관리한다(설계 §11 S0). 커밋은 main에 직접 하고 push한다(저장소 공개).
+
+## 2026-10-07 S0 구현 (Claude Opus 통합, Sonnet fixture, Codex 리뷰)
+
+S0의 키 없이 할 수 있는 부분과 ElevenLabs 첫 호출을 끝냈다. 남은 S0 기준은 ko·en 청취 판정 하나다.
+
+환경: HyperFrames CLI 0.8.139(2026-10-07 기준 최신)와 ajv 8.20.0을 정확한 버전으로 설치했다. `doctor --json`은 `.ok: false`인데 원인은 선택 항목(whisper-cpp, Kokoro, MusicGen, Docker 미실행)뿐이고 Node 23.9.0, FFmpeg 8.0.1, Chrome은 모두 통과했다. S0 기준을 "필수 항목 통과"로 판정했다. 1080×1920 빈 composition을 `-q draft -f 30`으로 렌더해 h264·yuv420p·30/1·60 frame을 확인했다. 기본 프로젝트는 GSAP 3.14.2를 jsDelivr CDN에서 불러오므로 S1에서 같은 버전을 `templates/_base/vendor/`에 고정한다. 렌더 품질 값은 이제 `draft`·`looks`(기본)·`delivery`(=`high`)다.
+
+HyperFrames 스킬: 전역 플러그인 `hyperframes@hyperframes` 0.8.139, 마켓플레이스 커밋 `80c2547e`를 `config/tools.lock.json`에 적고 `scripts/env-check.mjs`로 대조한다. 마켓플레이스 체크아웃은 `~/.claude/plugins/marketplaces/hyperframes`, 설치본은 `~/.claude/plugins/cache/hyperframes/hyperframes/0.8.139`다. 체크아웃의 LFS 파일 84개는 포인터로만 받아졌다(스킬 문서와는 무관한 에셋으로 보이나 미확인).
+
+계약·검증기: `schemas/v2/`에 languages·script·pronounce·timings·scenes 스키마를 두고 scenes는 `scenes.base.schema.json`과 `templates/<type>/props.schema.json`에서 `scripts/gen.mjs`가 만든다. 글자 수 제한은 Ajv 사용자 키워드 `maxGraphemes`로 grapheme 기준이다. `scripts/validate.mjs`는 스키마 오류를 `schema.<keyword>`, 의미 오류를 고유 코드(`phrase-id-hash`, `motion-unverified`, `transition-too-long` 등)로 낸다. 모션 자리별 허용 kind는 in이 text-in·element·number·emphasis, out이 text-out·element다. `manifest.schema.json`은 S2에서 manifest를 만들 때 쓴다. 구절 분할, 발화 범위, 숫자 경고는 S1·S2 분할기 범위다.
+
+ElevenLabs(Free, 키 교체 후): v4는 일반 TTS 엔드포인트(`/v1/text-to-speech/{voice}`)에서 `language_code`와 함께 200으로 동작해 `tts.endpoint`를 `tts`로 정했다. `wav_24000`은 PCM 24kHz·mono·16bit다. `character-cost` 헤더가 요청 글자 수와 같았다(v4 1자 1크레딧). Forced Alignment도 Free에서 쓸 수 있고 구독 크레딧에서 빠진다. 헤더 값이 음성 1초당 약 1.1~1.16이라 `alignCreditsPerSecond`를 1.2로 두었다. Voice Library 음성은 402 `paid_plan_required`("Free users cannot use library voices via the API")로 거부되어, Free 시험은 premade 음성만 쓴다. 결제 주기 재설정은 매월 4일 12:19(KST)다.
+
+정렬 응답: multipart로 보낸 텍스트의 `\n`이 `\r\n`으로 바뀌어 돌아온다(FormData 줄바꿈 정규화). 공백·줄바꿈도 `characters`와 `words`에 들어 있다. §7.2 3번의 대응 규칙을 "양쪽 모두 공백 문자를 건너뛰고 나머지 글자를 순서대로 맞춘다"로 확정한다. 정상 대본의 단어 loss가 0.6~1.1이라 설계 예시의 0.04는 척도가 틀렸다. 숫자를 그대로 둔 발화 문구는 전체 loss가 ko 1.40, en 0.84로 풀어 쓴 문구(ko 0.74, en 0.60)보다 높았다. 기준값은 S2 시험으로 정한다.
+
+청취 파일(`out/s0/listen/`, git 제외): ko는 Alice(`Xb7hH8MSUJpSbSDYk0k2`)·Jessica(`cgSgspJ2msm6clMCkdW9`), en은 Alice·Liam(`TX3LPaxmHKxFdv7VOQHJ`)로 10문장씩, 태그 문장 3개 포함. 숫자 비교용 `*-digits-*`는 Alice로 만들었다. S0에서 쓴 크레딧은 1,735(TTS 1,580 + 정렬 155)이고 이번 주기 사용량은 2,152/10,000이다.
+
+리뷰: Codex CLI 0.160.0, gpt-6-astra(추론 high), 읽기 전용으로 S0 diff를 리뷰했다. J1(경로의 편·언어와 내용 불일치 미검사), J2(`displayRange` 끝 초과 허용), J3(200ms 미만 구절 허용), J4(code point 기준 길이 제한) 네 건 모두 채택해 고쳤고 시험을 추가했다.
+
+검증: `npm test` 113개 통과(Mac Node 23.9.0, 컨테이너 Node 22.22.0), `gen.mjs --check`, `env-check.mjs` 통과. invalid fixture 36개가 기대 오류 코드를 낸다. 시간 변환은 frame 0~2700 전 구간에서 마이크로초 내림 값이 `f/30`을 포함함을 확인했다. 단, 엔진이 `start + duration`을 double로 더하면 끝 frame이 포함되는 경우(예: 12→36, 0.4+0.8=1.2000000000000002)가 있어 S1 경계 스냅샷에서 실제 동작을 본다.

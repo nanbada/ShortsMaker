@@ -1,0 +1,19 @@
+{
+  "base": "ko",
+  "description": "scene 2 reuses the id of scene 0",
+  "patch": [
+    {
+      "file": "scenes",
+      "op": "replace",
+      "path": "/scenes/2/id",
+      "value": "hook"
+    }
+  ],
+  "expect": [
+    {
+      "file": "scenes",
+      "code": "scene-id-duplicate",
+      "path": "/scenes/2/id"
+    }
+  ]
+}

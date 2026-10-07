@@ -1,0 +1,31 @@
+{
+  "base": "en",
+  "description": "fr-FR is not in languages.json",
+  "patch": [
+    {
+      "file": "script",
+      "op": "replace",
+      "path": "/lang",
+      "value": "fr-FR"
+    },
+    {
+      "file": "timings",
+      "op": "replace",
+      "path": "/lang",
+      "value": "fr-FR"
+    },
+    {
+      "file": "scenes",
+      "op": "replace",
+      "path": "/lang",
+      "value": "fr-FR"
+    }
+  ],
+  "expect": [
+    {
+      "file": "script",
+      "code": "lang-unsupported",
+      "path": "/lang"
+    }
+  ]
+}

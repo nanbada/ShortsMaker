@@ -1,0 +1,22 @@
+{
+  "base": "ko",
+  "description": "displayRange does not slice out the phrase display",
+  "patch": [
+    {
+      "file": "timings",
+      "op": "replace",
+      "path": "/phrases/2/displayRange",
+      "value": [
+        0,
+        3
+      ]
+    }
+  ],
+  "expect": [
+    {
+      "file": "timings",
+      "code": "phrase-range",
+      "path": "/phrases/2/displayRange"
+    }
+  ]
+}

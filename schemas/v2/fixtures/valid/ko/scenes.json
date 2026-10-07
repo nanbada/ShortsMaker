@@ -1,0 +1,112 @@
+{
+  "schemaVersion": "2.0.0",
+  "jobId": "mm-calc",
+  "lang": "ko-KR",
+  "theme": {
+    "id": "base",
+    "accent": "blue"
+  },
+  "captions": {
+    "enabled": true,
+    "style": "phrase-bottom"
+  },
+  "tailFrames": 15,
+  "scenes": [
+    {
+      "id": "hook",
+      "type": "hook",
+      "startPhrase": "s01-8964f159",
+      "props": {
+        "headline": "M/M 계산법",
+        "sub": "아직도 헷갈리나요?"
+      },
+      "transition": {
+        "id": "crossfade",
+        "durationFrames": 12
+      }
+    },
+    {
+      "id": "price",
+      "type": "keyword",
+      "startPhrase": "s03-d69a5ce4",
+      "props": {
+        "text": "1,200원",
+        "note": "1인 1개월 기준",
+        "emphasis": "accent"
+      },
+      "transition": {
+        "id": "cut"
+      },
+      "motion": {
+        "in": {
+          "id": "fx-rise",
+          "params": {
+            "accent": "blue"
+          },
+          "durationFrames": 12
+        }
+      }
+    },
+    {
+      "id": "easy",
+      "type": "keyword",
+      "startPhrase": "s05-5da1d9a2",
+      "props": {
+        "text": "간단!",
+        "emphasis": "plain"
+      },
+      "transition": {
+        "id": "cut"
+      }
+    },
+    {
+      "id": "how",
+      "type": "steps",
+      "startPhrase": "s06-cd14fda7",
+      "props": {
+        "title": "계산 순서",
+        "items": [
+          {
+            "text": "투입 인원 확인",
+            "atPhrase": "s07-16d052d2"
+          },
+          {
+            "text": "기간을 월로 환산",
+            "atPhrase": "s08-9463054f"
+          },
+          {
+            "text": "단가 곱하기",
+            "atPhrase": "s09-0606b3dd"
+          }
+        ]
+      },
+      "transition": {
+        "id": "crossfade",
+        "durationFrames": 15
+      }
+    },
+    {
+      "id": "example",
+      "type": "keyword",
+      "startPhrase": "s10-77dffda5",
+      "props": {
+        "text": "7,200원",
+        "note": "3명 × 2개월 × 1,200원",
+        "emphasis": "accent"
+      },
+      "transition": {
+        "id": "crossfade",
+        "durationFrames": 10
+      }
+    },
+    {
+      "id": "outro",
+      "type": "hook",
+      "startPhrase": "s12-9adce2aa",
+      "props": {
+        "headline": "직접 계산해 보세요",
+        "sub": "다음 영상에서 만나요"
+      }
+    }
+  ]
+}

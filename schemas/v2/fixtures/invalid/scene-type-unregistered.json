@@ -1,0 +1,19 @@
+{
+  "base": "ko",
+  "description": "scene type with no template directory",
+  "patch": [
+    {
+      "file": "scenes",
+      "op": "replace",
+      "path": "/scenes/0/type",
+      "value": "chart"
+    }
+  ],
+  "expect": [
+    {
+      "file": "scenes",
+      "code": "schema.enum",
+      "path": "/scenes/0/type"
+    }
+  ]
+}

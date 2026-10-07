@@ -1,0 +1,21 @@
+{
+  "base": "ko",
+  "description": "last scene carries a transition",
+  "patch": [
+    {
+      "file": "scenes",
+      "op": "add",
+      "path": "/scenes/5/transition",
+      "value": {
+        "id": "cut"
+      }
+    }
+  ],
+  "expect": [
+    {
+      "file": "scenes",
+      "code": "last-scene-transition",
+      "path": "/scenes/5/transition"
+    }
+  ]
+}

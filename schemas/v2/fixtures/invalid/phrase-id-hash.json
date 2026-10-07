@@ -1,0 +1,19 @@
+{
+  "base": "ko",
+  "description": "phrase id has a well-formed but wrong 8-hex hash",
+  "patch": [
+    {
+      "file": "timings",
+      "op": "replace",
+      "path": "/phrases/2/id",
+      "value": "s02-deadbeef"
+    }
+  ],
+  "expect": [
+    {
+      "file": "timings",
+      "code": "phrase-id-hash",
+      "path": "/phrases/2/id"
+    }
+  ]
+}

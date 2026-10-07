@@ -1,0 +1,41 @@
+{
+  "base": "ko",
+  "description": "schemaVersion 2.0.1 in every file",
+  "patch": [
+    {
+      "file": "script",
+      "op": "replace",
+      "path": "/schemaVersion",
+      "value": "2.0.1"
+    },
+    {
+      "file": "timings",
+      "op": "replace",
+      "path": "/schemaVersion",
+      "value": "2.0.1"
+    },
+    {
+      "file": "scenes",
+      "op": "replace",
+      "path": "/schemaVersion",
+      "value": "2.0.1"
+    }
+  ],
+  "expect": [
+    {
+      "file": "script",
+      "code": "schema.const",
+      "path": "/schemaVersion"
+    },
+    {
+      "file": "timings",
+      "code": "schema.const",
+      "path": "/schemaVersion"
+    },
+    {
+      "file": "scenes",
+      "code": "schema.const",
+      "path": "/schemaVersion"
+    }
+  ]
+}

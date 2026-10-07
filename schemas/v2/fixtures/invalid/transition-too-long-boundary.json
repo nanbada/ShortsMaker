@@ -1,0 +1,22 @@
+{
+  "base": "ko",
+  "description": "crossfade 19 frames: twice the length equals the 38-frame scene, must be strictly shorter",
+  "patch": [
+    {
+      "file": "scenes",
+      "op": "replace",
+      "path": "/scenes/2/transition",
+      "value": {
+        "id": "crossfade",
+        "durationFrames": 19
+      }
+    }
+  ],
+  "expect": [
+    {
+      "file": "scenes",
+      "code": "transition-too-long",
+      "path": "/scenes/2/transition/durationFrames"
+    }
+  ]
+}

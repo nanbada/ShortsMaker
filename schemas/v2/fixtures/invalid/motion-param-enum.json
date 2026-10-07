@@ -1,0 +1,19 @@
+{
+  "base": "ko",
+  "description": "enum param value outside the allowed values",
+  "patch": [
+    {
+      "file": "scenes",
+      "op": "replace",
+      "path": "/scenes/1/motion/in/params/accent",
+      "value": "red"
+    }
+  ],
+  "expect": [
+    {
+      "file": "scenes",
+      "code": "motion-param",
+      "path": "/scenes/1/motion/in/params/accent"
+    }
+  ]
+}

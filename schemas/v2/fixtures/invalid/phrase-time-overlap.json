@@ -1,0 +1,19 @@
+{
+  "base": "ko",
+  "description": "phrase starts before the previous phrase ends",
+  "patch": [
+    {
+      "file": "timings",
+      "op": "replace",
+      "path": "/phrases/3/startMs",
+      "value": 3800
+    }
+  ],
+  "expect": [
+    {
+      "file": "timings",
+      "code": "phrase-time",
+      "path": "/phrases/3"
+    }
+  ]
+}

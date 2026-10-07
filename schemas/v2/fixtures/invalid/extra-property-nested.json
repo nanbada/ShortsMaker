@@ -1,0 +1,30 @@
+{
+  "base": "ko",
+  "description": "unknown property inside a phrase and a scene",
+  "patch": [
+    {
+      "file": "timings",
+      "op": "add",
+      "path": "/phrases/0/extra",
+      "value": 1
+    },
+    {
+      "file": "scenes",
+      "op": "add",
+      "path": "/scenes/0/extra",
+      "value": 1
+    }
+  ],
+  "expect": [
+    {
+      "file": "timings",
+      "code": "schema.additionalProperties",
+      "path": "/phrases/0"
+    },
+    {
+      "file": "scenes",
+      "code": "schema.additionalProperties",
+      "path": "/scenes/0"
+    }
+  ]
+}

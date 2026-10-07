@@ -1,0 +1,19 @@
+{
+  "base": "ko",
+  "description": "steps item points at a phrase of the hook scene",
+  "patch": [
+    {
+      "file": "scenes",
+      "op": "replace",
+      "path": "/scenes/3/props/items/0/atPhrase",
+      "value": "s01-8964f159"
+    }
+  ],
+  "expect": [
+    {
+      "file": "scenes",
+      "code": "at-phrase-out-of-scene",
+      "path": "/scenes/3/props/items/0/atPhrase"
+    }
+  ]
+}

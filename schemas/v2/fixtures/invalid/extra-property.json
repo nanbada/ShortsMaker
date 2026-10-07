@@ -1,0 +1,41 @@
+{
+  "base": "ko",
+  "description": "unknown top-level property in every file",
+  "patch": [
+    {
+      "file": "script",
+      "op": "add",
+      "path": "/extra",
+      "value": true
+    },
+    {
+      "file": "timings",
+      "op": "add",
+      "path": "/extra",
+      "value": true
+    },
+    {
+      "file": "scenes",
+      "op": "add",
+      "path": "/extra",
+      "value": true
+    }
+  ],
+  "expect": [
+    {
+      "file": "script",
+      "code": "schema.additionalProperties",
+      "path": ""
+    },
+    {
+      "file": "timings",
+      "code": "schema.additionalProperties",
+      "path": ""
+    },
+    {
+      "file": "scenes",
+      "code": "schema.additionalProperties",
+      "path": ""
+    }
+  ]
+}

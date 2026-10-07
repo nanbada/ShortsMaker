@@ -1,0 +1,19 @@
+{
+  "base": "ko",
+  "description": "motion.in references an effect id that is not in the registry",
+  "patch": [
+    {
+      "file": "scenes",
+      "op": "replace",
+      "path": "/scenes/1/motion/in/id",
+      "value": "fx-missing"
+    }
+  ],
+  "expect": [
+    {
+      "file": "scenes",
+      "code": "motion-unknown-effect",
+      "path": "/scenes/1/motion/in/id"
+    }
+  ]
+}

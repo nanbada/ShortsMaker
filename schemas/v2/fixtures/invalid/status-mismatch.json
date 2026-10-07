@@ -1,0 +1,24 @@
+{
+  "base": "ko",
+  "description": "status needs_alignment_review but no phrase is flagged",
+  "patch": [
+    {
+      "file": "timings",
+      "op": "replace",
+      "path": "/status",
+      "value": "needs_alignment_review"
+    }
+  ],
+  "expect": [
+    {
+      "file": "timings",
+      "code": "status-mismatch",
+      "path": "/status"
+    },
+    {
+      "file": "scenes",
+      "code": "timings-not-ok",
+      "path": ""
+    }
+  ]
+}

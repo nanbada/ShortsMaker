@@ -1,0 +1,19 @@
+{
+  "base": "ko",
+  "description": "keyword scene given a hook prop",
+  "patch": [
+    {
+      "file": "scenes",
+      "op": "add",
+      "path": "/scenes/2/props/headline",
+      "value": "간단"
+    }
+  ],
+  "expect": [
+    {
+      "file": "scenes",
+      "code": "schema.additionalProperties",
+      "path": "/scenes/2/props"
+    }
+  ]
+}

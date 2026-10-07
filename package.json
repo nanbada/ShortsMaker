@@ -1,0 +1,16 @@
+{
+  "name": "shortsmaker",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "test": "node --test"
+  },
+  "dependencies": {
+    "ajv": "8.20.0",
+    "hyperframes": "0.8.139"
+  }
+}

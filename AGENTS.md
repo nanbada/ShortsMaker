@@ -2,7 +2,7 @@
 
 Code-rendered short-form video pipeline (YouTube Shorts / Reels) for a personal monetized channel. No generative video. Languages: ko, en first; ja, zh later.
 
-Status: design phase. No renderer, TTS adapter, `/short` skill, or motion tool exists yet. Next work is plan v2 stage S0, following the implementation design (decisions D1–D9 approved 2026-10-05).
+Status: S0 implemented (v2 contracts, validator, time-conversion lib; 2026-10-07) except the ko/en listening sign-off. No renderer, TTS adapter, `/short` skill, or motion tool exists yet. Next work is S1 (templates, resolve, assemble, render) via the manual audio + timings path.
 
 ## Source of truth
 
@@ -28,6 +28,10 @@ Create these only when their stage starts (plan v2 §6): `schemas/v2/`, `templat
 ## Commands
 
 ```sh
+npm test                                   # node --test, v2 contracts and libs
+node scripts/gen.mjs [--check]             # regenerate / check schemas/v2/scenes.schema.json
+node scripts/validate.mjs --job <id> --lang ko
+node scripts/env-check.mjs                 # HyperFrames CLI + plugin vs config/tools.lock.json
 python3 schemas/v1/validate_spec.py schemas/v1/video-spec.example.json
 python3 -m unittest discover -s schemas/v1 -p 'test_*.py'
 ```

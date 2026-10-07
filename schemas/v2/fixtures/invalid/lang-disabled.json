@@ -1,0 +1,31 @@
+{
+  "base": "en",
+  "description": "ja-JP exists but enabled is false",
+  "patch": [
+    {
+      "file": "script",
+      "op": "replace",
+      "path": "/lang",
+      "value": "ja-JP"
+    },
+    {
+      "file": "timings",
+      "op": "replace",
+      "path": "/lang",
+      "value": "ja-JP"
+    },
+    {
+      "file": "scenes",
+      "op": "replace",
+      "path": "/lang",
+      "value": "ja-JP"
+    }
+  ],
+  "expect": [
+    {
+      "file": "script",
+      "code": "lang-disabled",
+      "path": "/lang"
+    }
+  ]
+}

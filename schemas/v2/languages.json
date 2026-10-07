@@ -1,0 +1,13 @@
+{
+  "schemaVersion": "2.0.0",
+  "languages": {
+    "ko": { "tag": "ko-KR", "enabled": true, "font": "noto-sans-kr", "lineBreak": "keep-all",
+            "captionUnit": "space", "maxCaptionGraphemes": 14, "ttsLanguageCode": "ko" },
+    "en": { "tag": "en-US", "enabled": true, "font": "inter", "lineBreak": "normal",
+            "captionUnit": "space", "maxCaptionGraphemes": 32, "ttsLanguageCode": "en" },
+    "ja": { "tag": "ja-JP", "enabled": false, "font": "noto-sans-jp", "lineBreak": "budoux",
+            "captionUnit": "budoux", "maxCaptionGraphemes": 16, "ttsLanguageCode": "ja" },
+    "zh": { "tag": "zh-CN", "enabled": false, "font": "noto-sans-sc", "lineBreak": "budoux",
+            "captionUnit": "budoux", "maxCaptionGraphemes": 16, "ttsLanguageCode": "zh" }
+  }
+}

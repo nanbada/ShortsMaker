@@ -1,0 +1,26 @@
+{
+  "schemaVersion": "2.0.0",
+  "effects": [
+    {
+      "id": "fx-rise",
+      "kind": "text-in",
+      "source": { "type": "local", "revision": "test-1" },
+      "params": { "accent": { "type": "enum", "values": ["blue", "green"] } },
+      "durationFrames": { "min": 6, "max": 30, "default": 12, "stretch": "timeline" },
+      "verified": [
+        { "lang": "ko", "font": "noto-sans-kr", "size": "1080x1920", "revision": "test-1", "evidence": "test" }
+      ]
+    },
+    {
+      "id": "fx-fade-out",
+      "kind": "text-out",
+      "source": { "type": "local", "revision": "test-1" },
+      "params": {},
+      "durationFrames": { "min": 4, "max": 20, "default": 8, "stretch": "speed" },
+      "verified": [
+        { "lang": "ko", "font": "noto-sans-kr", "size": "1080x1920", "revision": "test-1", "evidence": "test" },
+        { "lang": "en", "font": "inter", "size": "1080x1920", "revision": "test-1", "evidence": "test" }
+      ]
+    }
+  ]
+}

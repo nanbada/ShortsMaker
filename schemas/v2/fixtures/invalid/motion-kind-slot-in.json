@@ -1,0 +1,22 @@
+{
+  "base": "ko",
+  "description": "text-out effect fx-fade-out used in the in slot",
+  "patch": [
+    {
+      "file": "scenes",
+      "op": "replace",
+      "path": "/scenes/1/motion/in",
+      "value": {
+        "id": "fx-fade-out",
+        "durationFrames": 8
+      }
+    }
+  ],
+  "expect": [
+    {
+      "file": "scenes",
+      "code": "motion-kind-slot",
+      "path": "/scenes/1/motion/in/id"
+    }
+  ]
+}

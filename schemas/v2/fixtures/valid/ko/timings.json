@@ -1,0 +1,563 @@
+{
+  "schemaVersion": "2.0.0",
+  "lang": "ko-KR",
+  "audio": {
+    "sha256": "b368faf8746bedbb8e572cfcd8218d92c08e39941be3b1ccb3d0321920ab12c0",
+    "durationMs": 45120,
+    "sampleRate": 24000,
+    "channels": 1
+  },
+  "source": {
+    "spokenSha256": "de09c76d6c3087a15b18e7645606cb7bded7e601bf98012a007603145fd9a62e",
+    "phrasingSha256": "177dd5615ed03c34bd6ffe0b5e587fdf0181f885c113450e1c44e7d550fdbaa7",
+    "aligner": {
+      "engine": "elevenlabs-forced-alignment",
+      "endpoint": "/v1/forced-alignment",
+      "algorithmVersion": 1,
+      "overallLoss": 0.04
+    }
+  },
+  "status": "ok",
+  "phrases": [
+    {
+      "id": "s01-8964f159",
+      "sentenceId": "s01",
+      "display": "M/M 계산법,",
+      "spoken": "M/M 계산법,",
+      "displayRange": [
+        0,
+        8
+      ],
+      "spokenRange": [
+        0,
+        8
+      ],
+      "startMs": 120,
+      "endMs": 1560,
+      "maxWordLoss": 0.02,
+      "timingSource": "aligner",
+      "review": "auto",
+      "issues": []
+    },
+    {
+      "id": "s01-0c860d92",
+      "sentenceId": "s01",
+      "display": "아직도 헷갈리나요?",
+      "spoken": "아직도 헷갈리나요?",
+      "displayRange": [
+        9,
+        19
+      ],
+      "spokenRange": [
+        9,
+        19
+      ],
+      "startMs": 1600,
+      "endMs": 3400,
+      "maxWordLoss": 0.03,
+      "timingSource": "aligner",
+      "review": "auto",
+      "issues": []
+    },
+    {
+      "id": "s02-59dbec63",
+      "sentenceId": "s02",
+      "display": "오늘은 딱",
+      "spoken": "오늘은 딱",
+      "displayRange": [
+        0,
+        5
+      ],
+      "spokenRange": [
+        0,
+        5
+      ],
+      "startMs": 3700,
+      "endMs": 4675,
+      "maxWordLoss": 0.01,
+      "timingSource": "aligner",
+      "review": "auto",
+      "issues": []
+    },
+    {
+      "id": "s02-472fd866",
+      "sentenceId": "s02",
+      "display": "세 가지만",
+      "spoken": "세 가지만",
+      "displayRange": [
+        6,
+        11
+      ],
+      "spokenRange": [
+        6,
+        11
+      ],
+      "startMs": 4715,
+      "endMs": 5690,
+      "maxWordLoss": 0.04,
+      "timingSource": "aligner",
+      "review": "auto",
+      "issues": []
+    },
+    {
+      "id": "s02-e7e548c3",
+      "sentenceId": "s02",
+      "display": "기억하세요.",
+      "spoken": "기억하세요.",
+      "displayRange": [
+        12,
+        18
+      ],
+      "spokenRange": [
+        12,
+        18
+      ],
+      "startMs": 5730,
+      "endMs": 6900,
+      "maxWordLoss": 0.02,
+      "timingSource": "aligner",
+      "review": "auto",
+      "issues": []
+    },
+    {
+      "id": "s03-d69a5ce4",
+      "sentenceId": "s03",
+      "display": "단가는 1,200원입니다.",
+      "spoken": "단가는 천이백 원입니다.",
+      "displayRange": [
+        0,
+        14
+      ],
+      "spokenRange": [
+        0,
+        13
+      ],
+      "startMs": 7300,
+      "endMs": 9900,
+      "maxWordLoss": 0.31,
+      "timingSource": "manual",
+      "review": "reviewed",
+      "issues": []
+    },
+    {
+      "id": "s04-9629dcbc",
+      "sentenceId": "s04",
+      "display": "1인 1개월",
+      "spoken": "1인 1개월",
+      "displayRange": [
+        0,
+        6
+      ],
+      "spokenRange": [
+        0,
+        6
+      ],
+      "startMs": 10200,
+      "endMs": 11380,
+      "maxWordLoss": 0.01,
+      "timingSource": "aligner",
+      "review": "auto",
+      "issues": []
+    },
+    {
+      "id": "s04-6b98c6f6",
+      "sentenceId": "s04",
+      "display": "기준입니다.",
+      "spoken": "기준입니다.",
+      "displayRange": [
+        7,
+        13
+      ],
+      "spokenRange": [
+        7,
+        13
+      ],
+      "startMs": 11420,
+      "endMs": 12600,
+      "maxWordLoss": 0.04,
+      "timingSource": "aligner",
+      "review": "auto",
+      "issues": []
+    },
+    {
+      "id": "s05-5da1d9a2",
+      "sentenceId": "s05",
+      "display": "정말 간단합니다.",
+      "spoken": "정말 간단합니다.",
+      "displayRange": [
+        0,
+        9
+      ],
+      "spokenRange": [
+        0,
+        9
+      ],
+      "startMs": 13000,
+      "endMs": 14200,
+      "maxWordLoss": 0.02,
+      "timingSource": "aligner",
+      "review": "auto",
+      "issues": []
+    },
+    {
+      "id": "s06-cd14fda7",
+      "sentenceId": "s06",
+      "display": "계산 순서는",
+      "spoken": "계산 순서는",
+      "displayRange": [
+        0,
+        6
+      ],
+      "spokenRange": [
+        0,
+        6
+      ],
+      "startMs": 14250,
+      "endMs": 15405,
+      "maxWordLoss": 0.03,
+      "timingSource": "aligner",
+      "review": "auto",
+      "issues": []
+    },
+    {
+      "id": "s06-f372b6b4",
+      "sentenceId": "s06",
+      "display": "이렇습니다.",
+      "spoken": "이렇습니다.",
+      "displayRange": [
+        7,
+        13
+      ],
+      "spokenRange": [
+        7,
+        13
+      ],
+      "startMs": 15445,
+      "endMs": 16600,
+      "maxWordLoss": 0.01,
+      "timingSource": "aligner",
+      "review": "auto",
+      "issues": []
+    },
+    {
+      "id": "s07-16d052d2",
+      "sentenceId": "s07",
+      "display": "먼저 투입",
+      "spoken": "먼저 투입",
+      "displayRange": [
+        0,
+        5
+      ],
+      "spokenRange": [
+        0,
+        5
+      ],
+      "startMs": 16900,
+      "endMs": 17957,
+      "maxWordLoss": 0.04,
+      "timingSource": "aligner",
+      "review": "auto",
+      "issues": []
+    },
+    {
+      "id": "s07-09275949",
+      "sentenceId": "s07",
+      "display": "인원을 확인하고,",
+      "spoken": "인원을 확인하고,",
+      "displayRange": [
+        6,
+        15
+      ],
+      "spokenRange": [
+        6,
+        15
+      ],
+      "startMs": 17997,
+      "endMs": 19900,
+      "maxWordLoss": 0.02,
+      "timingSource": "aligner",
+      "review": "auto",
+      "issues": []
+    },
+    {
+      "id": "s08-9463054f",
+      "sentenceId": "s08",
+      "display": "기간을 월",
+      "spoken": "기간을 월",
+      "displayRange": [
+        0,
+        5
+      ],
+      "spokenRange": [
+        0,
+        5
+      ],
+      "startMs": 20200,
+      "endMs": 21320,
+      "maxWordLoss": 0.03,
+      "timingSource": "aligner",
+      "review": "auto",
+      "issues": []
+    },
+    {
+      "id": "s08-e3bc00c8",
+      "sentenceId": "s08",
+      "display": "단위로 환산한 뒤,",
+      "spoken": "단위로 환산한 뒤,",
+      "displayRange": [
+        6,
+        16
+      ],
+      "spokenRange": [
+        6,
+        16
+      ],
+      "startMs": 21360,
+      "endMs": 23600,
+      "maxWordLoss": 0.01,
+      "timingSource": "aligner",
+      "review": "auto",
+      "issues": []
+    },
+    {
+      "id": "s09-0606b3dd",
+      "sentenceId": "s09",
+      "display": "마지막으로",
+      "spoken": "마지막으로",
+      "displayRange": [
+        0,
+        5
+      ],
+      "spokenRange": [
+        0,
+        5
+      ],
+      "startMs": 23900,
+      "endMs": 25100,
+      "maxWordLoss": 0.04,
+      "timingSource": "aligner",
+      "review": "auto",
+      "issues": []
+    },
+    {
+      "id": "s09-06595484",
+      "sentenceId": "s09",
+      "display": "단가를 곱합니다.",
+      "spoken": "단가를 곱합니다.",
+      "displayRange": [
+        6,
+        15
+      ],
+      "spokenRange": [
+        6,
+        15
+      ],
+      "startMs": 25140,
+      "endMs": 27300,
+      "maxWordLoss": 0.02,
+      "timingSource": "aligner",
+      "review": "auto",
+      "issues": []
+    },
+    {
+      "id": "s10-77dffda5",
+      "sentenceId": "s10",
+      "display": "예를 들어",
+      "spoken": "예를 들어",
+      "displayRange": [
+        0,
+        5
+      ],
+      "spokenRange": [
+        0,
+        5
+      ],
+      "startMs": 27900,
+      "endMs": 28856,
+      "maxWordLoss": 0.03,
+      "timingSource": "aligner",
+      "review": "auto",
+      "issues": []
+    },
+    {
+      "id": "s10-61ad8282",
+      "sentenceId": "s10",
+      "display": "세 명이 두 달이면,",
+      "spoken": "세 명이 두 달이면,",
+      "displayRange": [
+        6,
+        17
+      ],
+      "spokenRange": [
+        6,
+        17
+      ],
+      "startMs": 28896,
+      "endMs": 31000,
+      "maxWordLoss": 0.01,
+      "timingSource": "aligner",
+      "review": "auto",
+      "issues": []
+    },
+    {
+      "id": "s11-1c367a3a",
+      "sentenceId": "s11",
+      "display": "합계는",
+      "spoken": "합계는",
+      "displayRange": [
+        0,
+        3
+      ],
+      "spokenRange": [
+        0,
+        3
+      ],
+      "startMs": 31300,
+      "endMs": 32098,
+      "maxWordLoss": 0.04,
+      "timingSource": "aligner",
+      "review": "auto",
+      "issues": []
+    },
+    {
+      "id": "s11-a7744aa7",
+      "sentenceId": "s11",
+      "display": "칠천이백 원입니다.",
+      "spoken": "칠천이백 원입니다.",
+      "displayRange": [
+        4,
+        14
+      ],
+      "spokenRange": [
+        4,
+        14
+      ],
+      "startMs": 32138,
+      "endMs": 34800,
+      "maxWordLoss": 0.02,
+      "timingSource": "aligner",
+      "review": "auto",
+      "issues": []
+    },
+    {
+      "id": "s12-9adce2aa",
+      "sentenceId": "s12",
+      "display": "이제 직접",
+      "spoken": "이제 직접",
+      "displayRange": [
+        0,
+        5
+      ],
+      "spokenRange": [
+        0,
+        5
+      ],
+      "startMs": 35600,
+      "endMs": 36892,
+      "maxWordLoss": 0.03,
+      "timingSource": "aligner",
+      "review": "auto",
+      "issues": []
+    },
+    {
+      "id": "s12-87c1652e",
+      "sentenceId": "s12",
+      "display": "계산해 보세요.",
+      "spoken": "계산해 보세요.",
+      "displayRange": [
+        6,
+        14
+      ],
+      "spokenRange": [
+        6,
+        14
+      ],
+      "startMs": 36932,
+      "endMs": 39000,
+      "maxWordLoss": 0.01,
+      "timingSource": "aligner",
+      "review": "auto",
+      "issues": []
+    },
+    {
+      "id": "s13-5ccbb082",
+      "sentenceId": "s13",
+      "display": "댓글로 궁금한",
+      "spoken": "댓글로 궁금한",
+      "displayRange": [
+        0,
+        7
+      ],
+      "spokenRange": [
+        0,
+        7
+      ],
+      "startMs": 39400,
+      "endMs": 40578,
+      "maxWordLoss": 0.04,
+      "timingSource": "aligner",
+      "review": "auto",
+      "issues": []
+    },
+    {
+      "id": "s13-cc2b3c4c",
+      "sentenceId": "s13",
+      "display": "점을 남겨 주세요.",
+      "spoken": "점을 남겨 주세요.",
+      "displayRange": [
+        8,
+        18
+      ],
+      "spokenRange": [
+        8,
+        18
+      ],
+      "startMs": 40618,
+      "endMs": 42300,
+      "maxWordLoss": 0.02,
+      "timingSource": "aligner",
+      "review": "auto",
+      "issues": []
+    },
+    {
+      "id": "s14-11499c68",
+      "sentenceId": "s14",
+      "display": "다음 영상에서",
+      "spoken": "다음 영상에서",
+      "displayRange": [
+        0,
+        7
+      ],
+      "spokenRange": [
+        0,
+        7
+      ],
+      "startMs": 42700,
+      "endMs": 44011,
+      "maxWordLoss": 0.03,
+      "timingSource": "aligner",
+      "review": "auto",
+      "issues": []
+    },
+    {
+      "id": "s14-f8be41e4",
+      "sentenceId": "s14",
+      "display": "만나요!",
+      "spoken": "만나요!",
+      "displayRange": [
+        8,
+        12
+      ],
+      "spokenRange": [
+        8,
+        12
+      ],
+      "startMs": 44051,
+      "endMs": 44800,
+      "maxWordLoss": 0.01,
+      "timingSource": "aligner",
+      "review": "auto",
+      "issues": []
+    }
+  ]
+}

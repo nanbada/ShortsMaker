@@ -1,0 +1,82 @@
+{
+  "schemaVersion": "2.0.0",
+  "jobId": "mm-calc",
+  "lang": "ko-KR",
+  "title": "M/M 계산법",
+  "voice": {
+    "provider": "elevenlabs",
+    "model": "eleven_v4",
+    "voiceId": "TESTVOICE01",
+    "settings": {
+      "stability": 0.5,
+      "similarity": 0.75
+    },
+    "seed": 7
+  },
+  "sentences": [
+    {
+      "id": "s01",
+      "display": "M/M 계산법, 아직도 헷갈리나요?",
+      "tag": "curious, friendly"
+    },
+    {
+      "id": "s02",
+      "display": "오늘은 딱 세 가지만 기억하세요."
+    },
+    {
+      "id": "s03",
+      "display": "단가는 1,200원입니다.",
+      "spoken": "단가는 천이백 원입니다."
+    },
+    {
+      "id": "s04",
+      "display": "1인 1개월 기준입니다."
+    },
+    {
+      "id": "s05",
+      "display": "정말 간단합니다."
+    },
+    {
+      "id": "s06",
+      "display": "계산 순서는 이렇습니다."
+    },
+    {
+      "id": "s07",
+      "display": "먼저 투입 인원을 확인하고,"
+    },
+    {
+      "id": "s08",
+      "display": "기간을 월 단위로 환산한 뒤,"
+    },
+    {
+      "id": "s09",
+      "display": "마지막으로 단가를 곱합니다."
+    },
+    {
+      "id": "s10",
+      "display": "예를 들어 세 명이 두 달이면,"
+    },
+    {
+      "id": "s11",
+      "display": "합계는 칠천이백 원입니다."
+    },
+    {
+      "id": "s12",
+      "display": "이제 직접 계산해 보세요."
+    },
+    {
+      "id": "s13",
+      "display": "댓글로 궁금한 점을 남겨 주세요."
+    },
+    {
+      "id": "s14",
+      "display": "다음 영상에서 만나요!"
+    }
+  ],
+  "sources": [
+    {
+      "title": "Fixture reference",
+      "url": "https://example.com/mm-calc"
+    }
+  ]
+}

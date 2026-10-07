@@ -1,0 +1,33 @@
+{
+  "base": "ko",
+  "description": "timings needs_alignment_review with one flagged phrase",
+  "patch": [
+    {
+      "file": "timings",
+      "op": "replace",
+      "path": "/status",
+      "value": "needs_alignment_review"
+    },
+    {
+      "file": "timings",
+      "op": "replace",
+      "path": "/phrases/3/review",
+      "value": "flagged"
+    },
+    {
+      "file": "timings",
+      "op": "replace",
+      "path": "/phrases/3/issues",
+      "value": [
+        "high-loss"
+      ]
+    }
+  ],
+  "expect": [
+    {
+      "file": "scenes",
+      "code": "timings-not-ok",
+      "path": ""
+    }
+  ]
+}

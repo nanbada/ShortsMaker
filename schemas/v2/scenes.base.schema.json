@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://shortsmaker.local/schemas/v2/scenes.schema.json",
+  "title": "ShortsMaker scenes v2",
+  "$comment": "Base for scenes.schema.json. scripts/gen.mjs fills the scene type enum and per-type props from templates/<type>/props.schema.json.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "jobId", "lang", "theme", "captions", "tailFrames", "scenes"],
+  "$defs": {
+    "phraseId": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]{0,31}-[0-9a-f]{8}(-[1-9][0-9]*)?$" },
+    "motionRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "durationFrames"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]{0,47}$" },
+        "durationFrames": { "type": "integer", "minimum": 1 },
+        "params": { "type": "object" }
+      }
+    },
+    "transition": {
+      "type": "object",
+      "required": ["id"],
+      "properties": { "id": { "enum": ["cut", "crossfade"] } },
+      "if": { "properties": { "id": { "const": "crossfade" } } },
+      "then": {
+        "additionalProperties": false,
+        "required": ["id", "durationFrames"],
+        "properties": { "id": true, "durationFrames": { "type": "integer", "minimum": 2, "maximum": 30 } }
+      },
+      "else": { "additionalProperties": false, "properties": { "id": true } }
+    },
+    "scene": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "type", "startPhrase", "props"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]{0,31}$" },
+        "type": { "enum": [] },
+        "startPhrase": { "$ref": "#/$defs/phraseId" },
+        "props": { "type": "object" },
+        "transition": { "$ref": "#/$defs/transition" },
+        "motion": {
+          "type": "object",
+          "additionalProperties": false,
+          "minProperties": 1,
+          "properties": { "in": { "$ref": "#/$defs/motionRef" }, "out": { "$ref": "#/$defs/motionRef" } }
+        }
+      },
+      "allOf": []
+    }
+  },
+  "properties": {
+    "schemaVersion": { "const": "2.0.0" },
+    "jobId": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]{2,47}$" },
+    "lang": { "type": "string", "pattern": "^[a-z]{2}-[A-Z]{2}$" },
+    "theme": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "accent"],
+      "properties": { "id": { "const": "base" }, "accent": { "enum": ["blue", "green", "violet"] } }
+    },
+    "captions": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["enabled", "style"],
+      "properties": { "enabled": { "type": "boolean" }, "style": { "const": "phrase-bottom" } }
+    },
+    "tailFrames": { "type": "integer", "minimum": 0, "maximum": 90 },
+    "scenes": { "type": "array", "minItems": 1, "maxItems": 30, "items": { "$ref": "#/$defs/scene" } }
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "base": "ko",
+  "description": "timings lang differs from script lang",
+  "patch": [
+    {
+      "file": "timings",
+      "op": "replace",
+      "path": "/lang",
+      "value": "en-US"
+    }
+  ],
+  "expect": [
+    {
+      "file": "timings",
+      "code": "lang-mismatch",
+      "path": "/lang"
+    }
+  ]
+}

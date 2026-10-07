@@ -1,0 +1,19 @@
+{
+  "base": "ko",
+  "description": "startPhrase matches the id pattern but is not in timings",
+  "patch": [
+    {
+      "file": "scenes",
+      "op": "replace",
+      "path": "/scenes/1/startPhrase",
+      "value": "s99-deadbeef"
+    }
+  ],
+  "expect": [
+    {
+      "file": "scenes",
+      "code": "phrase-unknown",
+      "path": "/scenes/1/startPhrase"
+    }
+  ]
+}

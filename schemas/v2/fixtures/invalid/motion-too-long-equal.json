@@ -1,0 +1,31 @@
+{
+  "base": "ko",
+  "description": "in 30 + out 8 frames equals the 38-frame scene length; sum must be strictly shorter",
+  "patch": [
+    {
+      "file": "scenes",
+      "op": "add",
+      "path": "/scenes/2/motion",
+      "value": {
+        "in": {
+          "id": "fx-rise",
+          "params": {
+            "accent": "blue"
+          },
+          "durationFrames": 30
+        },
+        "out": {
+          "id": "fx-fade-out",
+          "durationFrames": 8
+        }
+      }
+    }
+  ],
+  "expect": [
+    {
+      "file": "scenes",
+      "code": "motion-too-long",
+      "path": "/scenes/2/motion"
+    }
+  ]
+}

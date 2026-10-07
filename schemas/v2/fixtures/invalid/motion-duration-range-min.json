@@ -1,0 +1,19 @@
+{
+  "base": "ko",
+  "description": "fx-rise durationFrames 5 is below min 6",
+  "patch": [
+    {
+      "file": "scenes",
+      "op": "replace",
+      "path": "/scenes/1/motion/in/durationFrames",
+      "value": 5
+    }
+  ],
+  "expect": [
+    {
+      "file": "scenes",
+      "code": "motion-duration-range",
+      "path": "/scenes/1/motion/in/durationFrames"
+    }
+  ]
+}

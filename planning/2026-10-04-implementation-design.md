@@ -2,7 +2,7 @@
 
 기준일 2026-10-04 (Asia/Seoul). [기획 v2](2026-10-04-claude-code-render-plan-v2.md)(r2) §6·§10과 [모션 문서](2026-10-04-motion-catalog-and-preset-tool.md) §3을 코드로 옮기기 위한 설계다. 방향과 범위는 두 문서를 따르고, 이 문서는 파일 구조, 데이터 계약의 필드, 스크립트 입출력, 캐시·재개·승인 규칙, 검사 방법, 단계별 완료 기준을 정한다. 코드와 스키마 파일은 아직 없다.
 
-상태: r4 (2026-10-05). r2는 [GPT 리뷰](2026-10-04-implementation-design-review.md) 1차의 G1~G10과 축소 제안을 반영했다. r3는 사용자 결정에 따라 TTS를 Gemini 3.8 Flash TTS에서 ElevenLabs Eleven v4로 바꾸고, 그에 맞춰 자막 정렬을 ElevenLabs Forced Alignment로 바꿨다(§6, §7, D6, D8). r4는 [2차 GPT 리뷰](2026-10-04-implementation-design-review.md#2차-리뷰-r3)의 H1~H7과 축소 제안을 반영했다. r5는 사용자 지시에 따라 ElevenLabs를 Free 플랜으로 시험하는 단계를 넣었다(D8, §4.7, §6.2, §6.4, §8). 항목별 판단은 §13에 있다. §2의 D1~D9는 2026-10-05 사용자가 모두 승인했고, D8은 같은 날 사용자 지시로 고쳤다.
+상태: r4 (2026-10-05). r2는 [GPT 리뷰](2026-10-04-implementation-design-review.md) 1차의 G1~G10과 축소 제안을 반영했다. r3는 사용자 결정에 따라 TTS를 Gemini 3.8 Flash TTS에서 ElevenLabs Eleven v4로 바꾸고, 그에 맞춰 자막 정렬을 ElevenLabs Forced Alignment로 바꿨다(§6, §7, D6, D8). r4는 [2차 GPT 리뷰](2026-10-04-implementation-design-review.md#2차-리뷰-r3)의 H1~H7과 축소 제안을 반영했다. r5는 사용자 지시에 따라 ElevenLabs를 Free 플랜으로 시험하는 단계를 넣었다(D8, §4.7, §6.2, §6.4, §8). 항목별 판단은 §13에 있다. r6(2026-10-07)은 S0 첫 호출 결과로 엔드포인트(§6.1), 정렬 글자 대응 규칙(§7.2 3번), 미확인 사항(§12)을 확정했다. 근거는 worklog 2026-10-07 항목이다. §2의 D1~D9는 2026-10-05 사용자가 모두 승인했고, D8은 같은 날 사용자 지시로 고쳤다.
 
 ## 1. 다시 확인한 외부 조건
 
@@ -279,7 +279,7 @@ out/<id>/<lang>/<run-id>/project/
 
 ### 6.1 요청
 
-모델은 `eleven_v4`, 출력은 `wav_24000`, 인증은 `xi-api-key` 헤더다. 공식 문서끼리 v4가 일반 TTS 엔드포인트를 받는지 엇갈리므로 S0 첫 호출로 둘 중 하나를 정해 `config/pipeline.json`의 `tts.endpoint`에 적는다. 운영 중에는 바꾸지 않고, 오류가 나도 다른 엔드포인트로 자동 전환하지 않는다. 엔드포인트 미지원이 아닌 401·402·429·timeout은 엔드포인트 선택과 무관하다.
+모델은 `eleven_v4`, 출력은 `wav_24000`, 인증은 `xi-api-key` 헤더다. S0 첫 호출(2026-10-07)에서 v4가 일반 TTS 엔드포인트로 동작해 `config/pipeline.json`의 `tts.endpoint`를 `tts`로 정했다. 아래 `dialogue` 본문은 기록으로 남긴다. 운영 중에는 바꾸지 않고, 오류가 나도 다른 엔드포인트로 자동 전환하지 않는다. 엔드포인트 미지원이 아닌 401·402·429·timeout은 엔드포인트 선택과 무관하다.
 
 `tts` 엔드포인트(우선 시험):
 
@@ -366,7 +366,7 @@ v2 §6의 문단별 합성·캐시는 S2 범위에 넣지 않는다. 한 편을 
 
 1. 정렬 텍스트는 TTS 요청과 같은 발화 문구에서 태그만 뺀 것이다(문장마다 줄바꿈). 직접 넣은 음성도 같은 텍스트를 쓴다.
 2. `POST /v1/forced-alignment`에 multipart로 `file`(narration.wav)과 `text`를 보낸다. 응답의 `characters[{text, start, end}]`, `words[{text, start, end, loss}]`, 전체 `loss`를 받는다. 시각은 초 단위이므로 반올림한 정수 ms로 바꾼다.
-3. 응답 `characters`를 정렬 텍스트의 코드 포인트에 앞에서부터 하나씩 대응시킨다. 응답이 공백·줄바꿈을 빼고 돌려주면 우리 쪽에서도 그 글자를 건너뛴다. 이 규칙은 S0 실제 응답 한 건으로 확정한다. 공백이 아닌 글자가 어긋나면 내용 문제가 아니라 adapter 오류이므로 `mapping-error`로 편 전체를 멈춘다.
+3. 응답 `characters`를 정렬 텍스트의 코드 포인트에 앞에서부터 하나씩 대응시킨다. 응답에는 공백·줄바꿈도 들어 있지만 multipart 전송 중 `\n`이 `\r\n`으로 바뀌어 돌아오므로, 양쪽 모두 공백 문자를 건너뛰고 나머지 글자를 순서대로 맞춘다(S0 확인). 공백이 아닌 글자가 어긋나면 내용 문제가 아니라 adapter 오류이므로 `mapping-error`로 편 전체를 멈춘다.
 4. 구절 시작은 구절 첫 글자의 `start`, 끝은 마지막 글자의 `end`다. 구절에 속한 단어의 최대 `loss`를 `maxWordLoss`로 기록한다.
 5. 내용 검사. Forced Alignment는 주어진 텍스트를 음성에 맞춰 넣는 방식이라 TTS가 어구를 빠뜨려도 시각을 만들어 낸다. 그래서 시각 자체가 아니라 다음 신호로 걸러 낸다. 단어 `loss`가 기준값을 넘으면 `high-loss`(텍스트와 음성의 불일치 의심), 연속한 두 단어 사이가 1,000ms를 넘으면 그 간격 양옆 구절에 `long-gap`(덧붙은 발화·효과음·긴 쉼 의심)을 붙인다. 이 간격 검사는 구절 안팎을 가리지 않고, 첫 단어 앞과 마지막 단어 뒤의 무음도 1,000ms를 넘으면 포함한다. 정규화한 구절 문구가 앞뒤 2구절 안에 다시 나오면 `repeat-risk`다. loss 기준값은 문서에 근거가 없어 S2의 §7.3 시험 결과로 정한다. 1,000ms도 S2에서 조정할 시작값이다.
 6. 구절 시각을 검사한다. 시작 < 끝, 앞 구절 끝 ≤ 다음 구절 시작, 길이 200ms 이상, 끝 ≤ 음성 길이. 어긋나면 `non-monotonic`·`overlap`·`too-short`·`out-of-range`로 표시한다.
@@ -514,8 +514,8 @@ HyperFrames가 한국어 줄바꿈·폰트·자막 처리를 하지 못할 때�
 
 ## 12. 미확인 사항
 
-- ElevenLabs v4: Free 플랜 API에서 v4·Forced Alignment 사용 가능 여부, 일반 TTS 엔드포인트 지원 여부, 글자당 크레딧 비율, `language_code` 적용 여부, 동시 요청 한도, `wav_24000`의 채널 수, 402 응답의 실제 코드, audio tag가 효과음처럼 읽히는 빈도
-- Forced Alignment: 응답 `characters`의 공백·줄바꿈 처리, 한국어 정확도, 구독 크레딧 차감 여부, `loss` 기준값, 누락·삽입 검출력
+- ElevenLabs v4: 동시 요청 한도, 크레딧 소진 시 402의 실제 코드, audio tag가 효과음처럼 읽히는 빈도. (S0 확인: Free에서 v4·Forced Alignment 사용 가능, 일반 TTS 엔드포인트 지원, 1자 1크레딧, `language_code` 수용, `wav_24000`은 mono, Voice Library 음성은 Free API에서 402 `paid_plan_required`)
+- Forced Alignment: 한국어 정확도, `loss` 기준값(정상 대본에서 단어 loss 0.6~1.1), 누락·삽입 검출력. (S0 확인: 구독 크레딧에서 음성 1초당 약 1.1~1.16 차감)
 - Dialogue API의 `output_format` 전달 위치, `apply_text_normalization`의 한국어 숫자 처리
 - HyperFrames: FFmpeg 8.0.1·Node 23 호환, `data-fps` 속성, clip의 반열린 구간 여부, 기본 출력 codec, `snapshot`의 세로 크기, GSAP 기본 로드 방식, 2MiB를 넘는 한글 폰트 처리
 - Claude Code 스킬 frontmatter의 모델 지정

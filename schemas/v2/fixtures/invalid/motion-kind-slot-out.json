@@ -1,0 +1,27 @@
+{
+  "base": "ko",
+  "description": "text-in effect fx-rise used in the out slot",
+  "patch": [
+    {
+      "file": "scenes",
+      "op": "add",
+      "path": "/scenes/2/motion",
+      "value": {
+        "out": {
+          "id": "fx-rise",
+          "params": {
+            "accent": "blue"
+          },
+          "durationFrames": 12
+        }
+      }
+    }
+  ],
+  "expect": [
+    {
+      "file": "scenes",
+      "code": "motion-kind-slot",
+      "path": "/scenes/2/motion/out/id"
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://shortsmaker.local/schemas/v2/pronounce.schema.json",
+  "title": "ShortsMaker pronunciation dictionary v2",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "lang", "entries"],
+  "properties": {
+    "schemaVersion": { "const": "2.0.0" },
+    "lang": { "type": "string", "pattern": "^[a-z]{2}-[A-Z]{2}$" },
+    "entries": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["display", "spoken"],
+        "properties": {
+          "display": { "type": "string", "minLength": 1, "maxGraphemes": 40, "pattern": "^[^\\[\\]]+$" },
+          "spoken": { "type": "string", "minLength": 1, "maxGraphemes": 80, "pattern": "^[^\\[\\]]+$" }
+        }
+      }
+    }
+  }
+}

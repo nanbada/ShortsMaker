@@ -1,0 +1,19 @@
+{
+  "base": "ko",
+  "description": "hook headline of 25 graphemes (max 24)",
+  "patch": [
+    {
+      "file": "scenes",
+      "op": "replace",
+      "path": "/scenes/0/props/headline",
+      "value": "가나다라마바사아자차카타파하가나다라마바사아자차카"
+    }
+  ],
+  "expect": [
+    {
+      "file": "scenes",
+      "code": "schema.maxGraphemes",
+      "path": "/scenes/0/props/headline"
+    }
+  ]
+}

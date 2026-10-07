@@ -1,0 +1,9 @@
+{
+  "hyperframesCli": "0.8.139",
+  "hyperframesPlugin": {
+    "id": "hyperframes@hyperframes",
+    "version": "0.8.139",
+    "marketplace": "heygen-com/hyperframes",
+    "marketplaceCommit": "80c2547eac05c345e5d3eab490940fd375452f61"
+  }
+}

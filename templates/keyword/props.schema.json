@@ -1,0 +1,10 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["text", "emphasis"],
+  "properties": {
+    "text": { "type": "string", "minLength": 1, "maxGraphemes": 12 },
+    "note": { "type": "string", "minLength": 1, "maxGraphemes": 30 },
+    "emphasis": { "enum": ["accent", "plain"] }
+  }
+}

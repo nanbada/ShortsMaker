@@ -1,0 +1,19 @@
+{
+  "base": "ko",
+  "description": "first scene starts at the second phrase",
+  "patch": [
+    {
+      "file": "scenes",
+      "op": "replace",
+      "path": "/scenes/0/startPhrase",
+      "value": "s01-0c860d92"
+    }
+  ],
+  "expect": [
+    {
+      "file": "scenes",
+      "code": "first-scene-start",
+      "path": "/scenes/0/startPhrase"
+    }
+  ]
+}

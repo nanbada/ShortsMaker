@@ -1,0 +1,25 @@
+{
+  "base": "ko",
+  "description": "startPhrase of scenes 1 and 2 swapped",
+  "patch": [
+    {
+      "file": "scenes",
+      "op": "replace",
+      "path": "/scenes/1/startPhrase",
+      "value": "s05-5da1d9a2"
+    },
+    {
+      "file": "scenes",
+      "op": "replace",
+      "path": "/scenes/2/startPhrase",
+      "value": "s03-d69a5ce4"
+    }
+  ],
+  "expect": [
+    {
+      "file": "scenes",
+      "code": "start-phrase-order",
+      "path": "/scenes/2/startPhrase"
+    }
+  ]
+}
