@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="__LANG__">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <script src="vendor/gsap.min.js"></script>
+    <style>
+      @font-face {
+        font-family: "Noto Sans KR";
+        src: url("assets/fonts/noto-sans-kr.woff2") format("woff2");
+        font-weight: 100 900;
+        font-display: block;
+      }
+      @font-face {
+        font-family: "Inter";
+        src: url("assets/fonts/inter.woff2") format("woff2");
+        font-weight: 100 900;
+        font-display: block;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        width: 1080px;
+        height: 1920px;
+        overflow: hidden;
+        background: #0e1014;
+      }
+      #root {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        color: #f5f6f8;
+        --bg: #0e1014;
+        --fg: #f5f6f8;
+        --muted: #a3a9b5;
+        --safe-top: 260px;
+        --caption-top: 1250px;
+      }
+      #root.lang-ko {
+        font-family: "Noto Sans KR", sans-serif;
+        word-break: keep-all;
+        overflow-wrap: anywhere;
+      }
+      #root.lang-en {
+        font-family: "Inter", sans-serif;
+      }
+      #root.accent-blue {
+        --accent: #4f8cff;
+      }
+      #root.accent-green {
+        --accent: #2fca74;
+      }
+      #root.accent-violet {
+        --accent: #9b6bff;
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      id="root"
+      class="lang-__LANG_ALIAS__ accent-__ACCENT__"
+      data-composition-id="root"
+      data-width="1080"
+      data-height="1920"
+      data-duration="__DURATION__"
+      data-fps="30"
+    >
+__HOSTS__
+      <audio id="narration" src="assets/narration.wav" data-start="0" data-volume="1"></audio>
+    </div>
+    <script>
+      (() => {
+        const data = JSON.parse(__ROOT_DATA__);
+        const tl = gsap.timeline({ paused: true });
+        // Crossfade: the incoming scene sits on top and fades in; the outgoing scene stays opaque.
+        for (const x of data.crossfades) {
+          tl.fromTo(
+            `#${x.hostId}`,
+            { opacity: 0 },
+            { opacity: 1, duration: x.durationFrames / data.fps, ease: "none" },
+            x.startFrame / data.fps,
+          );
+        }
+        window.__timelines["root"] = tl;
+      })();
+    </script>
+  </body>
+</html>

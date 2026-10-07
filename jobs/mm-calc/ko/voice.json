@@ -1,0 +1,8 @@
+{
+  "provider": "manual",
+  "planTier": null,
+  "ttsKey": null,
+  "audioSha256": "343a51b3409cca52454a8b94c57351180adb39381ee023dd365fa96cc775a18c",
+  "spokenSha256": "4b9acb09a9ab5fe452b64a4462ad65437464a84f4ff4ccab452bf322061da299",
+  "durationMs": 30880
+}

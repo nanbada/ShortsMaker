@@ -1,0 +1,9 @@
+{
+  "schemaVersion": "2.0.0",
+  "lang": "ko-KR",
+  "entries": [
+    { "display": "M/M", "spoken": "맨 먼스" },
+    { "display": "1,200원", "spoken": "천이백 원" },
+    { "display": "0.33개월", "spoken": "영 점 삼삼 개월" }
+  ]
+}

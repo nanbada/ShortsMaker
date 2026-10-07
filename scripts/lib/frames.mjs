@@ -47,10 +47,17 @@ export function captionFrames(phrases, holdMs = CAPTION_GAP_HOLD_MS) {
   });
 }
 
-// Engine adapter only: frames → seconds strings with 6 decimals, start and end floored to µs.
+// Engine adapter only: frames → seconds strings with 6 decimals. Start is floored to µs.
+// The engine shows a clip while start <= t < start + duration, adding the two as doubles
+// (0.4 + 0.8 = 1.2000000000000002 would keep frame 36 visible), so the end is floored to µs
+// and moved 1 µs earlier. Frame f is sampled at t = f / fps.
 const usToSeconds = (us) => `${Math.floor(us / 1e6)}.${String(us % 1e6).padStart(6, '0')}`;
 export function framesToSecondsAttrs(startFrame, endFrame) {
   const startUs = Math.floor((startFrame * 1e6) / FPS);
-  const endUs = Math.floor((endFrame * 1e6) / FPS);
+  const endUs = Math.floor((endFrame * 1e6) / FPS) - 1;
   return { start: usToSeconds(startUs), duration: usToSeconds(endUs - startUs) };
 }
+
+// Timeline position (seconds) for a discrete change that must take effect at frame f:
+// half a frame early, so seeking exactly to f / fps never lands on the set point.
+export const discreteAt = (f) => (f - 0.5) / FPS;

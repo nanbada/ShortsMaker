@@ -161,3 +161,24 @@ ElevenLabs(Free, 키 교체 후): v4는 일반 TTS 엔드포인트(`/v1/text-to-
 리뷰: Codex CLI 0.160.0, gpt-6-astra(추론 high), 읽기 전용으로 S0 diff를 리뷰했다. J1(경로의 편·언어와 내용 불일치 미검사), J2(`displayRange` 끝 초과 허용), J3(200ms 미만 구절 허용), J4(code point 기준 길이 제한) 네 건 모두 채택해 고쳤고 시험을 추가했다.
 
 검증: `npm test` 113개 통과(Mac Node 23.9.0, 컨테이너 Node 22.22.0), `gen.mjs --check`, `env-check.mjs` 통과. invalid fixture 36개가 기대 오류 코드를 낸다. 시간 변환은 frame 0~2700 전 구간에서 마이크로초 내림 값이 `f/30`을 포함함을 확인했다. 단, 엔진이 `start + duration`을 double로 더하면 끝 frame이 포함되는 경우(예: 12→36, 0.4+0.8=1.2000000000000002)가 있어 S1 경계 스냅샷에서 실제 동작을 본다.
+
+## 2026-10-07 S1 첫 한국어 1편 (Claude Opus 통합, Sonnet 단위 시험)
+
+API 키 없이 수동 음성 경로로 한국어 1편을 끝까지 만들었다. 음성은 S0 청취용 Alice 합성(30.88초, 10문장)을 고정 입력으로 쓰고, 시각은 S0 Forced Alignment 응답을 글자 대응으로 구절 시각에 옮겨 `voice --audio-file --timings`로 들여왔다. 사람이 들으며 만든 시각이 아니므로 S2 정확도 기준 파일로 쓰지 않는다. 편 데이터는 `jobs/mm-calc/ko/`, 음성은 git 밖 `cache/manual/<sha256>.wav`다.
+
+구현: `scripts/lib/phrasing.mjs`(발음 사전 치환, 구두점·공백 기준 구절 분할, 닫는 따옴표·괄호는 앞 구절에 붙임), `scripts/resolve.mjs`, `scripts/assemble.mjs`, `scripts/render.mjs`, `scripts/run.mjs`(voice 수동 경로, build, draft), `scripts/engine-check.mjs`, 템플릿 `_base`(root, captions)·`hook`·`keyword`·`steps`, Noto Sans KR·Inter 가변 woff2(무변형 변환, OFL), GSAP 3.14.2 vendor. Sonnet 서브에이전트가 phrasing·resolve·assemble·글자 대응 단위 시험을 썼고 지적한 두 결함(닫는 따옴표가 다음 구절로 가는 문제, 대응 오류 메시지 위치 -1)을 고쳤다.
+
+엔진에서 확인한 것과 그에 따른 변경:
+
+- sub-composition 안의 `<script type="application/json">`이 JS로 실행돼 런타임 오류가 났다. props는 `JSON.parse("<리터럴>")`로 넘긴다(설계 D3·§5.1 r7).
+- 엔진은 clip을 `start ≤ t < start + duration`으로 보이는데 두 값을 double로 더한다. 끝을 1µs 당겼다(§5.4). 합성 프로젝트를 png-sequence로 렌더해 frame%3이 0·1·2인 경계, 1 frame clip, sub-composition 안 중첩 clip(자막 방식), 크로스페이드 단조 증가를 픽셀로 확인했고 모두 통과했다.
+- `back.out` 이징 tween은 끝난 뒤 뒤로 seek하면 값이 달라졌다(같은 GSAP를 브라우저에서 직접 돌리면 정상이라 HyperFrames 런타임 쪽 동작으로 본다). 템플릿에서 넘쳤다 돌아오는 이징을 쓰지 않는다.
+- 결정론: 장면·전환·자막 경계 90 frame을 순방향·역방향·무작위 순서로 스냅샷해 비교했다. 해시는 43 frame에서 다르지만 채널 차이 최대 1(자막 경계 근처 합성 차이)이라 채널 차이 2 이하를 같은 frame으로 판정한다.
+- `snapshot`은 `GEMINI_API_KEY`가 있으면 Gemini 비전 분석을 기본 실행한다. 래퍼가 API 키 환경변수를 지우고 `--describe false`를 넘긴다. `check`·`snapshot`·`render`는 `--no-browser-gpu`로 돌린다.
+- 3.9MB 한글 폰트가 로컬 렌더·스냅샷에 정상으로 쓰였다. `check`의 `content_overlap` 경고는 크로스페이드 구간의 이중 노출에서만 나와 기록만 한다.
+
+S1 기준: 폰트 로드(lint 폰트 규칙 통과, 스냅샷 확인), 글자 잘림·넘침 0(check layout 오류 0), 순차·역순·무작위 seek 동일(위 기준), ffprobe 규격(1080×1920, 30/1, 942 frame, yuv420p, h264, 오디오 1개, max_volume > −50dB), 장면·자막 경계(합성 프로젝트 시험), 직렬화(`</script>`, 따옴표, `&`, U+2028이 든 props·자막으로 lint·check·draft 통과), 수동 음성 경로(키 없이 완성, 발화 문구·발음 사전·음성 파일을 바꾸면 build 거부)를 모두 확인했다. draft 렌더는 31.4초 영상에 약 28초 걸렸다.
+
+리뷰: Codex(gpt-6-astra, high) S1 리뷰가 사용 한도로 20:55까지 중단됐다. 중단 전 진행 기록에 남은 지적 하나(구절을 손으로 지운 timings가 build를 통과)는 build에서 구절 목록 자체를 현재 분할과 해시로 대조하도록 고쳤다. 같은 기록의 "공백이 든 사전 치환에서 발화 글자 누락"은 재현 사례를 만들어 봤으나 재현하지 못했다. 한도가 풀리면 다시 리뷰한다.
+
+미해결: 구절 분할이 앞에서부터 채워 "릴스 모두 같은 / 방식이에요."처럼 끝 구절이 짧아질 수 있다. S1 기준 밖이라 그대로 두었다.

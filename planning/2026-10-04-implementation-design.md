@@ -2,7 +2,7 @@
 
 기준일 2026-10-04 (Asia/Seoul). [기획 v2](2026-10-04-claude-code-render-plan-v2.md)(r2) §6·§10과 [모션 문서](2026-10-04-motion-catalog-and-preset-tool.md) §3을 코드로 옮기기 위한 설계다. 방향과 범위는 두 문서를 따르고, 이 문서는 파일 구조, 데이터 계약의 필드, 스크립트 입출력, 캐시·재개·승인 규칙, 검사 방법, 단계별 완료 기준을 정한다. 코드와 스키마 파일은 아직 없다.
 
-상태: r4 (2026-10-05). r2는 [GPT 리뷰](2026-10-04-implementation-design-review.md) 1차의 G1~G10과 축소 제안을 반영했다. r3는 사용자 결정에 따라 TTS를 Gemini 3.8 Flash TTS에서 ElevenLabs Eleven v4로 바꾸고, 그에 맞춰 자막 정렬을 ElevenLabs Forced Alignment로 바꿨다(§6, §7, D6, D8). r4는 [2차 GPT 리뷰](2026-10-04-implementation-design-review.md#2차-리뷰-r3)의 H1~H7과 축소 제안을 반영했다. r5는 사용자 지시에 따라 ElevenLabs를 Free 플랜으로 시험하는 단계를 넣었다(D8, §4.7, §6.2, §6.4, §8). 항목별 판단은 §13에 있다. r6(2026-10-07)은 S0 첫 호출 결과로 엔드포인트(§6.1), 정렬 글자 대응 규칙(§7.2 3번), 미확인 사항(§12)을 확정했다. 근거는 worklog 2026-10-07 항목이다. §2의 D1~D9는 2026-10-05 사용자가 모두 승인했고, D8은 같은 날 사용자 지시로 고쳤다.
+상태: r4 (2026-10-05). r2는 [GPT 리뷰](2026-10-04-implementation-design-review.md) 1차의 G1~G10과 축소 제안을 반영했다. r3는 사용자 결정에 따라 TTS를 Gemini 3.8 Flash TTS에서 ElevenLabs Eleven v4로 바꾸고, 그에 맞춰 자막 정렬을 ElevenLabs Forced Alignment로 바꿨다(§6, §7, D6, D8). r4는 [2차 GPT 리뷰](2026-10-04-implementation-design-review.md#2차-리뷰-r3)의 H1~H7과 축소 제안을 반영했다. r5는 사용자 지시에 따라 ElevenLabs를 Free 플랜으로 시험하는 단계를 넣었다(D8, §4.7, §6.2, §6.4, §8). 항목별 판단은 §13에 있다. r6(2026-10-07)은 S0 첫 호출 결과로 엔드포인트(§6.1), 정렬 글자 대응 규칙(§7.2 3번), 미확인 사항(§12)을 확정했다. 근거는 worklog 2026-10-07 항목이다. r7(같은 날)은 S1 구현에서 확인한 엔진 동작으로 D3의 전달 방식(§5.1), 끝 시각 보정(§5.4), 폰트·GSAP(§5.2), 결정론 검사 방법과 이징 제한(§9)을 고쳤다. §2의 D1~D9는 2026-10-05 사용자가 모두 승인했고, D8은 같은 날 사용자 지시로 고쳤다.
 
 ## 1. 다시 확인한 외부 조건
 
@@ -35,7 +35,7 @@ Mac에서 관측한 환경은 macOS 26.6.2, Node 23.9.0, FFmpeg 8.0.1, Python 3.
 |---|---|---|---|
 | D1 | 파이프라인 코드는 Node.js 하나로 쓴다. 빌드 단계 없는 ESM JavaScript, 테스트는 `node:test`. 추가 의존성은 `ajv`, `hyperframes`(정확한 버전), `gsap`(§5.2 확인 후)만 둔다. ElevenLabs는 SDK 없이 `fetch`로 REST를 부른다 | 렌더 도구가 Node이고 조립기가 HTML·JS를 다룬다. 런타임을 둘로 나누면 설치·버전 기록이 두 벌이 된다. v1 README도 제품 구현의 검증기로 Ajv2020을 지목했다 | Python. v1 Python 검증기는 어느 경우든 그대로 둔다 |
 | D2 | `scenes.json`에서 시각은 구절 ID로만 지정한다(`startPhrase`, `atPhrase`). 구절 ID에는 그 구절 화면 문구의 해시 8자가 들어 있어 문구가 바뀌면 ID도 바뀐다(§4.4). 프레임 값은 resolver가 `timings.json`에서 계산해 파생 파일 `timeline.json`에 쓴다 | Claude가 숫자를 계산하지 않으므로 타이밍 실수가 계약 단계에서 사라진다. 음성을 다시 만들어도 문구가 같으면 장면 데이터를 그대로 쓰고, 문구가 바뀐 구절을 참조한 장면은 검증에서 걸린다 | v2 §6 문구대로 scenes.json에 프레임을 직접 적기. 편집 계약이 scenes.json 하나라는 원칙은 D2에서도 유지된다 |
-| D3 | 장면 데이터는 템플릿 파일 안의 `<script type="application/json">` 블록으로 넘긴다. 조립기가 하는 일은 id 토큰 치환과 이 블록 삽입뿐이다 | HyperFrames 변수는 스칼라만 받아 목록과 구절 시각을 넘길 수 없다 | 항목 수만큼 변수를 펼치기(`item1`~`item5`) |
+| D3 | 장면 데이터는 템플릿 스크립트 안의 `JSON.parse("<JSON 문자열 리터럴>")`로 넘긴다(r7: HyperFrames가 sub-composition의 `<script>`를 type과 무관하게 JS로 다시 실행해 `application/json` 블록이 런타임 오류를 냈다). 조립기가 하는 일은 id 토큰 치환과 이 리터럴 삽입뿐이다 | HyperFrames 변수는 스칼라만 받아 목록과 구절 시각을 넘길 수 없다 | 항목 수만큼 변수를 펼치기(`item1`~`item5`) |
 | D4 | 자막은 조립기가 `timings.json`에서 만드는 별도 composition 하나로 둔다. 카탈로그 자막 컴포넌트는 S1에서 쓰지 않는다 | 카탈로그 자막은 가로 화면·고정 단어 목록 데모라 9:16과 우리 구절 데이터에 맞추려면 어차피 다시 써야 한다 | 카탈로그 자막을 vendor로 가져와 개조 |
 | D5 | 발음 사전은 v2의 `pronounce.txt` 대신 `pronounce.json`으로 둔다. 언어별 공용 사전과 편별 사전을 합쳐 쓰고 편별 항목이 이긴다 | 치환 구간을 화면 문구와 발화 문구 사이에서 기계로 추적해야 자막 시각을 되돌려 줄 수 있다 | 탭 구분 텍스트 |
 | D6 | 자동 정렬은 ElevenLabs Forced Alignment API 하나로 한다. TTS 음성과 직접 넣은 음성에 같은 경로를 쓰고, 자동 정렬을 쓸 수 없을 때는 사람이 만든 `timings.json`을 들여와 끝낸다(§6.5). whisper.cpp·LCS 재정렬은 S0~S3에서 만들지 않는다 | 발화 문구를 그대로 받아 그 글자에 시각을 붙이므로 전사문을 대본에 다시 맞추는 단계가 사라진다. 단어별 `loss`가 불일치 신호가 된다. 다만 loss는 주어진 텍스트를 맞춘 점수일 뿐 독립 전사 검증이 아니어서 잡지 못하는 유형이 있다(§7.3). 45초 한 편 약 $0.003이고 로컬 모델 2.9GiB가 필요 없다 | `/with-timestamps`(v4 지원 미확인, 누락 신호 없음). r2의 whisper.cpp 로컬 정렬(무료, LCS 필요, [r2 §7](archive/implementation-design-r2.md)). Forced Alignment가 S2 기준에 못 미치면 자동 정렬 대안을 그때 다시 정한다 |
@@ -247,15 +247,15 @@ frame으로 바꾼 파생 파일이다. 사람이 고치지 않는다. ms→fram
 
 장면 유형 하나는 `templates/<type>/scene.html` 한 파일이다. 파일 전체가 `<template>`로 감싸져 있고, 그 안에 `data-composition-id="__ID__"`·`data-width="1080"`·`data-height="1920"`인 루트 요소, `.t-<type>` 접두어를 쓰는 스타일, 스크립트가 있다. 요소 id는 모두 `__ID__-` 접두어를 붙인다. 조립기는 `__ID__`를 인스턴스 id(`s03-steps` 형식, 패턴 검사 후)로 바꾸고 props 블록을 넣는 것 외에 템플릿을 건드리지 않는다.
 
-스크립트는 `__ID__-props` 블록의 JSON을 읽어 DOM을 만든다. props 값은 `textContent`로만 넣고 `innerHTML`은 쓰지 않는다. 그다음 정지된 GSAP 타임라인 하나를 만들어 `window.__timelines["__ID__"]`에 등록한다. 텍스트 크기를 측정해야 하면 `document.fonts.ready` 안에서 타임라인을 만들고 마지막에 등록한다. `Date.now()`, `performance.now()`, 시드 없는 `Math.random()`, `requestAnimationFrame`, 타이머, 네트워크 호출은 쓰지 않는다. 타이밍 정보는 조립기가 props의 예약 키 `$timing: {fps, clipFrames, leadInFrames, nominalFrames}`로 넘긴다(§4.6).
+스크립트는 `JSON.parse(__PROPS__)`로 props를 읽어 DOM을 만든다. props 값은 `textContent`로만 넣고 `innerHTML`은 쓰지 않는다. 그다음 정지된 GSAP 타임라인 하나를 만들어 `window.__timelines["__ID__"]`에 등록한다. 텍스트 크기를 측정해야 하면 `document.fonts.ready` 안에서 타임라인을 만들고 마지막에 등록한다. `Date.now()`, `performance.now()`, 시드 없는 `Math.random()`, `requestAnimationFrame`, 타이머, 네트워크 호출은 쓰지 않는다. 타이밍 정보는 조립기가 props의 예약 키 `$timing: {fps, clipFrames, leadInFrames, nominalFrames}`로 넘긴다(§4.6).
 
-props 블록 직렬화는 `JSON.stringify` 결과에서 `<`, `>`, `&`, U+2028, U+2029를 `\uXXXX`로 바꾼다. 그래서 문구에 `</script>`가 들어 있어도 블록이 닫히지 않는다.
+props 직렬화는 `JSON.stringify`를 두 번 해 JSON을 담은 JS 문자열 리터럴을 만들고, 그 결과에서 `<`, `>`, `&`, U+2028, U+2029를 `\uXXXX`로 바꾼다. 그래서 문구에 `</script>`가 들어 있어도 스크립트가 닫히지 않는다. 템플릿 애니메이션에는 목표값을 넘었다 돌아오는 이징(`back`, `elastic`)을 쓰지 않는다. HyperFrames 0.8.139 런타임은 이런 tween이 끝난 뒤 뒤로 seek하면 다른 값을 그렸다(§9).
 
 `preview.json`은 갤러리·회귀 검사용 고정 props다. 유형마다 한국어·영어 각 1개를 둔다.
 
 ### 5.2 GSAP와 폰트
 
-GSAP는 외부 URL에서 받지 않고 `templates/_base/vendor/`의 고정 파일을 쓴다. HyperFrames 기본 프로젝트가 GSAP를 어떻게 불러오는지 S0에서 확인하고, CDN이면 npm `gsap`의 정확한 버전 파일로 바꾼다. 폰트는 `templates/fonts/`의 woff2를 `@font-face`(`font-display: block`)로 선언한다. HyperFrames는 2MiB 이하 로컬 폰트만 번들에 넣는데 한글 폰트는 이보다 클 수 있다. 로컬 렌더에서는 프로젝트 `assets/`의 파일로 읽히므로 문제가 없을 것으로 보지만 S1에서 확인한다. 폰트 라이선스 파일을 같은 폴더에 둔다.
+GSAP는 외부 URL에서 받지 않고 `templates/_base/vendor/`의 고정 파일을 쓴다. HyperFrames 기본 프로젝트는 GSAP 3.14.2를 CDN에서 불러오므로 npm `gsap@3.14.2`의 `dist/gsap.min.js`를 커밋해 고정했다(r7, 출처와 해시는 vendor README). 폰트는 `templates/fonts/`의 woff2를 `@font-face`(`font-display: block`)로 선언한다. HyperFrames는 2MiB 이하 로컬 폰트만 번들에 넣는데 한글 폰트는 이보다 클 수 있다. S1에서 Noto Sans KR 가변 폰트 woff2(3.9MB)가 로컬 렌더·스냅샷에 정상으로 쓰이는 것을 확인했다. 폰트 라이선스 파일을 같은 폴더에 둔다.
 
 ### 5.3 조립 결과
 
@@ -273,7 +273,7 @@ out/<id>/<lang>/<run-id>/project/
 
 ### 5.4 frame→초 변환
 
-변환은 조립기 한 함수에서만 한다. 시작과 끝을 각각 마이크로초 정수로 내림해 `startUs = floor(startFrame × 10⁶ / 30)`, `endUs = floor(endFrame × 10⁶ / 30)`로 두고, `data-start = startUs / 10⁶`, `data-duration = (endUs − startUs) / 10⁶`를 소수 6자리로 적는다. 엔진이 frame `f`에서 쓰는 시각 `f/30`은 내림한 시작값 이상이 되므로 장면은 정확히 `startFrame`부터 보인다. clip이 `[start, end)` 반열린 구간으로 보이는지는 문서에서 확인하지 못했다. S1에서 모든 경계의 앞뒤 frame 스냅샷으로 검사한다.
+변환은 조립기 한 함수에서만 한다. 시작과 끝을 각각 마이크로초 정수로 내림해 `startUs = floor(startFrame × 10⁶ / 30)`, `endUs = floor(endFrame × 10⁶ / 30) − 1`로 두고, `data-start = startUs / 10⁶`, `data-duration = (endUs − startUs) / 10⁶`를 소수 6자리로 적는다. 엔진이 frame `f`에서 쓰는 시각 `f/30`은 내림한 시작값 이상이 되므로 장면은 정확히 `startFrame`부터 보인다. HyperFrames 스킬 문서는 clip을 `start ≤ t < start + duration` 반열린 구간으로 보인다고 적는데, 엔진이 두 값을 double로 더하면 `0.4 + 0.8 = 1.2000000000000002`처럼 끝 frame이 구간 안에 들어간다. 그래서 끝을 1µs 당긴다(r7). `scripts/engine-check.mjs boundaries`가 frame%3이 0·1·2인 경계, 1 frame clip, sub-composition 안의 중첩 clip, 크로스페이드를 png-sequence 픽셀로 검사해 통과했다.
 
 ## 6. 음성 (tts.mjs)
 
@@ -433,7 +433,7 @@ HyperFrames는 `node_modules/.bin/hyperframes`의 고정 버전을 직접 실행
 | 음성 | `ffprobe` + `ffmpeg volumedetect` | 오디오 스트림 1개, 길이 ≥ 나레이션 길이 − 50ms, `max_volume` > −50dB |
 | 결정론 | S1과 템플릿 변경 시 | 같은 frame을 순차·역순·무작위 순서로 뽑은 PNG 해시 일치 |
 
-결정론 검사는 `snapshot --at`에 frame 목록을 순서를 바꿔 넣어 여러 번 실행하고, `render --format png-sequence`의 같은 frame과 비교하는 방식을 먼저 시도한다. CLI가 내부에서 시각을 정렬해 순서를 통제할 수 없으면 `preview` 서버와 Playwright로 seek 순서를 직접 지정하는 방식을 쓴다. S1에서 둘 중 순서를 실제로 통제하는 방식 하나를 정하고 나머지는 만들지 않는다. 검사 frame에는 홀수·짝수 길이 전환의 경계 앞뒤, `frame % 3`이 0·1·2인 경계(30fps에서 ms 내림이 달라지는 경우), 마지막 frame을 넣는다. `snapshot`이 9:16 크기로 저장하는지도 문서에는 1920×1080으로만 적혀 있어 같은 때 확인한다.
+결정론 검사는 `snapshot --at`에 frame 목록을 순방향·역방향·시드 고정 무작위 순서로 넣어 세 번 실행하고 같은 frame끼리 비교한다(`scripts/engine-check.mjs determinism`). `snapshot`은 `--at` 순서대로 한 페이지에서 seek하고 그 순서로 파일 번호를 붙인다(CLI 0.8.139 소스 확인). Chrome 합성 단계가 직전 seek에 따라 1 LSB 차이를 내는 경우가 있어(자막 경계 근처) 채널별 차이 2 이하를 같은 frame으로 본다(r7). `snapshot`과 `check`는 `--no-browser-gpu`로 돌리고, `snapshot`은 `GEMINI_API_KEY`가 있으면 Gemini 비전 분석을 기본으로 부르므로 래퍼가 API 키 환경변수를 지우고 `--describe false`를 넘긴다. 검사 frame에는 홀수·짝수 길이 전환의 경계 앞뒤, `frame % 3`이 0·1·2인 경계(30fps에서 ms 내림이 달라지는 경우), 마지막 frame을 넣는다. `snapshot`이 9:16 크기로 저장하는지도 문서에는 1920×1080으로만 적혀 있어 같은 때 확인한다.
 
 ## 10. /short 스킬 (S3)
 

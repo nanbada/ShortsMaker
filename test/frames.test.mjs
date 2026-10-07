@@ -4,7 +4,7 @@ import assert from 'node:assert/strict';
 import {
   FPS, MIN_SCENE_FRAMES, MAX_TOTAL_FRAMES, CAPTION_GAP_HOLD_MS,
   msToFrameRound, msToFrameCeil, totalFrames, leadSplit, sceneNominal, sceneClips,
-  captionFrames, framesToSecondsAttrs,
+  captionFrames, framesToSecondsAttrs, discreteAt,
 } from '../scripts/lib/frames.mjs';
 
 test('constants', () => {
@@ -195,22 +195,22 @@ describe('sceneNominal / sceneClips', () => {
   });
 });
 
-describe('framesToSecondsAttrs (microsecond floor)', () => {
+describe('framesToSecondsAttrs (microsecond floor, end 1 µs early)', () => {
   test('frame 1 starts at 0.033333', () => {
     assert.equal(framesToSecondsAttrs(1, 2).start, '0.033333');
   });
   test('[1,2) lasts 0.033333', () => {
-    assert.deepEqual(framesToSecondsAttrs(1, 2), { start: '0.033333', duration: '0.033333' });
+    assert.deepEqual(framesToSecondsAttrs(1, 2), { start: '0.033333', duration: '0.033332' });
   });
-  test('[0,3) lasts 0.100000', () => {
-    assert.deepEqual(framesToSecondsAttrs(0, 3), { start: '0.000000', duration: '0.100000' });
+  test('[0,3) lasts 0.099999', () => {
+    assert.deepEqual(framesToSecondsAttrs(0, 3), { start: '0.000000', duration: '0.099999' });
   });
-  test('[2,3) starts 0.066666 and lasts 0.033334 (start and end floored separately)', () => {
-    assert.deepEqual(framesToSecondsAttrs(2, 3), { start: '0.066666', duration: '0.033334' });
+  test('[2,3) starts 0.066666 and lasts 0.033333 (start and end floored separately)', () => {
+    assert.deepEqual(framesToSecondsAttrs(2, 3), { start: '0.066666', duration: '0.033333' });
   });
   test('whole seconds and large frames keep six decimals', () => {
-    assert.deepEqual(framesToSecondsAttrs(30, 60), { start: '1.000000', duration: '1.000000' });
-    assert.deepEqual(framesToSecondsAttrs(0, 2700), { start: '0.000000', duration: '90.000000' });
+    assert.deepEqual(framesToSecondsAttrs(30, 60), { start: '1.000000', duration: '0.999999' });
+    assert.deepEqual(framesToSecondsAttrs(0, 2700), { start: '0.000000', duration: '89.999999' });
     assert.equal(framesToSecondsAttrs(2699, 2700).start, '89.966666');
   });
   test('output is always digits.dddddd', () => {
@@ -243,6 +243,23 @@ describe('framesToSecondsAttrs (microsecond floor)', () => {
       }
     }
     assert.deepEqual(failures.slice(0, 5), []);
+  });
+
+  test('in double arithmetic (as the engine adds them) the end frame is outside the window', () => {
+    const failures = [];
+    for (let s = 0; s < 2700; s++) {
+      for (let e = s + 1; e <= 2700; e++) {
+        if (covers(s, e, e).ok) failures.push(`[${s},${e})`);
+        if (failures.length > 5) break;
+      }
+      if (failures.length > 5) break;
+    }
+    assert.deepEqual(failures, []);
+  });
+
+  test('discreteAt is half a frame before the frame time', () => {
+    assert.equal(discreteAt(30), 29.5 / 30);
+    for (let f = 1; f <= 2700; f++) assert.ok(discreteAt(f) < f / 30 && discreteAt(f) > (f - 1) / 30);
   });
 
   test('seek time check at both extremes (first and last visible frame) for every start/end pair', () => {

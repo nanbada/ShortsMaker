@@ -1,0 +1,25 @@
+{
+  "schemaVersion": "2.0.0",
+  "jobId": "mm-calc",
+  "lang": "ko-KR",
+  "title": "M/M 계산법",
+  "voice": {
+    "provider": "elevenlabs",
+    "model": "eleven_v4",
+    "voiceId": "Xb7hH8MSUJpSbSDYk0k2",
+    "settings": { "stability": 0.5, "similarity": 0.75 },
+    "seed": 7
+  },
+  "sentences": [
+    { "id": "s01", "display": "M/M 계산법, 아직도 헷갈리나요?", "tag": "curious, friendly" },
+    { "id": "s02", "display": "단가는 1,200원입니다." },
+    { "id": "s03", "display": "세 명이 두 달 일하면 여섯 M/M예요." },
+    { "id": "s04", "display": "생각보다 훨씬 간단합니다.", "tag": "excited" },
+    { "id": "s05", "display": "먼저 투입 인원을 확인하세요." },
+    { "id": "s06", "display": "기간은 반드시 월 단위로 바꿔야 해요." },
+    { "id": "s07", "display": "예를 들어 열흘은 0.33개월입니다." },
+    { "id": "s08", "display": "유튜브 쇼츠와 인스타그램 릴스 모두 같은 방식이에요." },
+    { "id": "s09", "display": "숫자가 커져도 원리는 같습니다.", "tag": "calm" },
+    { "id": "s10", "display": "오늘 내용, 저장해 두고 필요할 때 꺼내 보세요." }
+  ]
+}

@@ -1,0 +1,418 @@
+{
+  "schemaVersion": "2.0.0",
+  "lang": "ko-KR",
+  "audio": {
+    "sha256": "343a51b3409cca52454a8b94c57351180adb39381ee023dd365fa96cc775a18c",
+    "durationMs": 30880,
+    "sampleRate": 24000,
+    "channels": 1
+  },
+  "source": {
+    "spokenSha256": "4b9acb09a9ab5fe452b64a4462ad65437464a84f4ff4ccab452bf322061da299",
+    "phrasingSha256": "7f2960f7a909c8b54b5aae7f378a19aa2a36b667fe38944e2625c8ff19072b33",
+    "aligner": null
+  },
+  "status": "ok",
+  "phrases": [
+    {
+      "id": "s01-8964f159",
+      "sentenceId": "s01",
+      "display": "M/M 계산법,",
+      "spoken": "맨 먼스 계산법,",
+      "displayRange": [
+        0,
+        8
+      ],
+      "spokenRange": [
+        0,
+        9
+      ],
+      "startMs": 300,
+      "endMs": 1260,
+      "maxWordLoss": null,
+      "timingSource": "manual",
+      "review": "reviewed",
+      "issues": []
+    },
+    {
+      "id": "s01-0c860d92",
+      "sentenceId": "s01",
+      "display": "아직도 헷갈리나요?",
+      "spoken": "아직도 헷갈리나요?",
+      "displayRange": [
+        9,
+        19
+      ],
+      "spokenRange": [
+        10,
+        20
+      ],
+      "startMs": 1780,
+      "endMs": 2780,
+      "maxWordLoss": null,
+      "timingSource": "manual",
+      "review": "reviewed",
+      "issues": []
+    },
+    {
+      "id": "s02-d69a5ce4",
+      "sentenceId": "s02",
+      "display": "단가는 1,200원입니다.",
+      "spoken": "단가는 천이백 원입니다.",
+      "displayRange": [
+        0,
+        14
+      ],
+      "spokenRange": [
+        0,
+        13
+      ],
+      "startMs": 3540,
+      "endMs": 5020,
+      "maxWordLoss": null,
+      "timingSource": "manual",
+      "review": "reviewed",
+      "issues": []
+    },
+    {
+      "id": "s03-52adde05",
+      "sentenceId": "s03",
+      "display": "세 명이 두 달 일하면",
+      "spoken": "세 명이 두 달 일하면",
+      "displayRange": [
+        0,
+        12
+      ],
+      "spokenRange": [
+        0,
+        12
+      ],
+      "startMs": 5700,
+      "endMs": 7140,
+      "maxWordLoss": null,
+      "timingSource": "manual",
+      "review": "reviewed",
+      "issues": []
+    },
+    {
+      "id": "s03-5eb6b6e6",
+      "sentenceId": "s03",
+      "display": "여섯 M/M예요.",
+      "spoken": "여섯 맨 먼스예요.",
+      "displayRange": [
+        13,
+        22
+      ],
+      "spokenRange": [
+        13,
+        23
+      ],
+      "startMs": 7300,
+      "endMs": 8380,
+      "maxWordLoss": null,
+      "timingSource": "manual",
+      "review": "reviewed",
+      "issues": []
+    },
+    {
+      "id": "s04-4ca7574c",
+      "sentenceId": "s04",
+      "display": "생각보다 훨씬 간단합니다.",
+      "spoken": "생각보다 훨씬 간단합니다.",
+      "displayRange": [
+        0,
+        14
+      ],
+      "spokenRange": [
+        0,
+        14
+      ],
+      "startMs": 9100,
+      "endMs": 10760,
+      "maxWordLoss": null,
+      "timingSource": "manual",
+      "review": "reviewed",
+      "issues": []
+    },
+    {
+      "id": "s05-07ddb622",
+      "sentenceId": "s05",
+      "display": "먼저 투입 인원을",
+      "spoken": "먼저 투입 인원을",
+      "displayRange": [
+        0,
+        9
+      ],
+      "spokenRange": [
+        0,
+        9
+      ],
+      "startMs": 11520,
+      "endMs": 12560,
+      "maxWordLoss": null,
+      "timingSource": "manual",
+      "review": "reviewed",
+      "issues": []
+    },
+    {
+      "id": "s05-c098a1af",
+      "sentenceId": "s05",
+      "display": "확인하세요.",
+      "spoken": "확인하세요.",
+      "displayRange": [
+        10,
+        16
+      ],
+      "spokenRange": [
+        10,
+        16
+      ],
+      "startMs": 12720,
+      "endMs": 13240,
+      "maxWordLoss": null,
+      "timingSource": "manual",
+      "review": "reviewed",
+      "issues": []
+    },
+    {
+      "id": "s06-c97413c9",
+      "sentenceId": "s06",
+      "display": "기간은 반드시 월 단위로",
+      "spoken": "기간은 반드시 월 단위로",
+      "displayRange": [
+        0,
+        13
+      ],
+      "spokenRange": [
+        0,
+        13
+      ],
+      "startMs": 13900,
+      "endMs": 15620,
+      "maxWordLoss": null,
+      "timingSource": "manual",
+      "review": "reviewed",
+      "issues": []
+    },
+    {
+      "id": "s06-735fe709",
+      "sentenceId": "s06",
+      "display": "바꿔야 해요.",
+      "spoken": "바꿔야 해요.",
+      "displayRange": [
+        14,
+        21
+      ],
+      "spokenRange": [
+        14,
+        21
+      ],
+      "startMs": 15740,
+      "endMs": 16379,
+      "maxWordLoss": null,
+      "timingSource": "manual",
+      "review": "reviewed",
+      "issues": []
+    },
+    {
+      "id": "s07-f13d325f",
+      "sentenceId": "s07",
+      "display": "예를 들어 열흘은",
+      "spoken": "예를 들어 열흘은",
+      "displayRange": [
+        0,
+        9
+      ],
+      "spokenRange": [
+        0,
+        9
+      ],
+      "startMs": 17060,
+      "endMs": 18280,
+      "maxWordLoss": null,
+      "timingSource": "manual",
+      "review": "reviewed",
+      "issues": []
+    },
+    {
+      "id": "s07-71932f42",
+      "sentenceId": "s07",
+      "display": "0.33개월입니다.",
+      "spoken": "영 점 삼삼 개월입니다.",
+      "displayRange": [
+        10,
+        20
+      ],
+      "spokenRange": [
+        10,
+        23
+      ],
+      "startMs": 18480,
+      "endMs": 19840,
+      "maxWordLoss": null,
+      "timingSource": "manual",
+      "review": "reviewed",
+      "issues": []
+    },
+    {
+      "id": "s08-35648202",
+      "sentenceId": "s08",
+      "display": "유튜브 쇼츠와 인스타그램",
+      "spoken": "유튜브 쇼츠와 인스타그램",
+      "displayRange": [
+        0,
+        13
+      ],
+      "spokenRange": [
+        0,
+        13
+      ],
+      "startMs": 20520,
+      "endMs": 22180,
+      "maxWordLoss": null,
+      "timingSource": "manual",
+      "review": "reviewed",
+      "issues": []
+    },
+    {
+      "id": "s08-d31000ce",
+      "sentenceId": "s08",
+      "display": "릴스 모두 같은",
+      "spoken": "릴스 모두 같은",
+      "displayRange": [
+        14,
+        22
+      ],
+      "spokenRange": [
+        14,
+        22
+      ],
+      "startMs": 22360,
+      "endMs": 23460,
+      "maxWordLoss": null,
+      "timingSource": "manual",
+      "review": "reviewed",
+      "issues": []
+    },
+    {
+      "id": "s08-06d50807",
+      "sentenceId": "s08",
+      "display": "방식이에요.",
+      "spoken": "방식이에요.",
+      "displayRange": [
+        23,
+        29
+      ],
+      "spokenRange": [
+        23,
+        29
+      ],
+      "startMs": 23620,
+      "endMs": 24160,
+      "maxWordLoss": null,
+      "timingSource": "manual",
+      "review": "reviewed",
+      "issues": []
+    },
+    {
+      "id": "s09-abe0b323",
+      "sentenceId": "s09",
+      "display": "숫자가 커져도 원리는",
+      "spoken": "숫자가 커져도 원리는",
+      "displayRange": [
+        0,
+        11
+      ],
+      "spokenRange": [
+        0,
+        11
+      ],
+      "startMs": 24800,
+      "endMs": 26320,
+      "maxWordLoss": null,
+      "timingSource": "manual",
+      "review": "reviewed",
+      "issues": []
+    },
+    {
+      "id": "s09-4399f08d",
+      "sentenceId": "s09",
+      "display": "같습니다.",
+      "spoken": "같습니다.",
+      "displayRange": [
+        12,
+        17
+      ],
+      "spokenRange": [
+        12,
+        17
+      ],
+      "startMs": 26560,
+      "endMs": 26940,
+      "maxWordLoss": null,
+      "timingSource": "manual",
+      "review": "reviewed",
+      "issues": []
+    },
+    {
+      "id": "s10-f197161d",
+      "sentenceId": "s10",
+      "display": "오늘 내용,",
+      "spoken": "오늘 내용,",
+      "displayRange": [
+        0,
+        6
+      ],
+      "spokenRange": [
+        0,
+        6
+      ],
+      "startMs": 27580,
+      "endMs": 28120,
+      "maxWordLoss": null,
+      "timingSource": "manual",
+      "review": "reviewed",
+      "issues": []
+    },
+    {
+      "id": "s10-94fb1154",
+      "sentenceId": "s10",
+      "display": "저장해 두고 필요할 때",
+      "spoken": "저장해 두고 필요할 때",
+      "displayRange": [
+        7,
+        19
+      ],
+      "spokenRange": [
+        7,
+        19
+      ],
+      "startMs": 28660,
+      "endMs": 30020,
+      "maxWordLoss": null,
+      "timingSource": "manual",
+      "review": "reviewed",
+      "issues": []
+    },
+    {
+      "id": "s10-5bc37372",
+      "sentenceId": "s10",
+      "display": "꺼내 보세요.",
+      "spoken": "꺼내 보세요.",
+      "displayRange": [
+        20,
+        27
+      ],
+      "spokenRange": [
+        20,
+        27
+      ],
+      "startMs": 30120,
+      "endMs": 30700,
+      "maxWordLoss": null,
+      "timingSource": "manual",
+      "review": "reviewed",
+      "issues": []
+    }
+  ]
+}

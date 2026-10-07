@@ -1,0 +1,61 @@
+<template>
+  <style>
+    #__ID__ {
+      position: absolute;
+      inset: 0;
+      background: var(--bg);
+    }
+    #__ID__ .t-keyword-wrap {
+      position: absolute;
+      left: 80px;
+      right: 80px;
+      top: var(--safe-top);
+      bottom: calc(1920px - var(--caption-top) + 60px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 40px;
+      text-align: center;
+    }
+    #__ID__ .t-keyword-text {
+      display: block;
+      font-size: 180px;
+      line-height: 1.08;
+      font-weight: 900;
+      letter-spacing: -0.03em;
+    }
+    #__ID__ .t-keyword-text.accent {
+      color: var(--accent);
+    }
+    #__ID__ .t-keyword-note {
+      font-size: 56px;
+      line-height: 1.3;
+      font-weight: 500;
+      color: var(--muted);
+    }
+  </style>
+  <div id="__ID__" data-composition-id="__ID__" data-width="1080" data-height="1920">
+    <div class="t-keyword-wrap">
+      <div id="__ID__-text" class="t-keyword-text"></div>
+      <div id="__ID__-note" class="t-keyword-note"></div>
+    </div>
+  </div>
+  <script>
+    (() => {
+      const id = "__ID__";
+      const props = JSON.parse(__PROPS__);
+      const t0 = props.$timing.leadInFrames / props.$timing.fps;
+      const text = document.getElementById(`${id}-text`);
+      const note = document.getElementById(`${id}-note`);
+      text.textContent = props.text;
+      if (props.emphasis === "accent") text.classList.add("accent");
+      if (props.note) note.textContent = props.note;
+      else note.remove();
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo(text, { opacity: 0, scale: 0.82 }, { opacity: 1, scale: 1, duration: 0.45, ease: "power3.out" }, t0);
+      if (props.note) tl.fromTo(note, { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" }, t0 + 0.25);
+      window.__timelines[id] = tl;
+    })();
+  </script>
+</template>
